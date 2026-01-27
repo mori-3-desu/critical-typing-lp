@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* v4では @theme ブロックの中に設定を書きます */
+@theme {
+  /* アニメーションの定義 */
+  --animate-blob: blob 7s infinite;
+  --font-rounded: var(--font-rounded);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* キーフレーム（動きの内容） */
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  scroll-behavior: smooth;
+}
+
+/* アニメーション定義（v3ではここで書くかtailwind.config.ts推奨ですが、CSSでも動きます） */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+/* === スクロールバー制御 (ここから修正版) === */
+
+/* 1. 【スマホ (デフォルト)】 強制的に非表示 */
+::-webkit-scrollbar {
+  display: none;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* 2. 【PC (768px以上)】 カスタム表示を有効化 */
+@media (min-width: 768px) {
+  /* スクロールバー本体を表示 */
+  ::-webkit-scrollbar {
+    display: block;
+    width: 16px;
+  }
+
+  /* 背景トラック */
+  ::-webkit-scrollbar-track {
+    background-color: #020617;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* つまみ */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #fcd34d 0%, #d97706 100%);
+    border-radius: 99px;
+    border: 3px solid #020617;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.4);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #fffbeb 0%, #f59e0b 100%);
+  }
+
+  /* --- 矢印ボタン制御 --- */
+
+  /* まずボタン領域を確保 */
+  ::-webkit-scrollbar-button {
+    display: none; /* 基本は消す */
+    height: 0;
+    width: 0;
+  }
+
+  /* 上ボタン (PCのみ復活) */
+  ::-webkit-scrollbar-button:vertical:start:decrement {
+    display: block;
+    height: 28px;
+    width: 16px;
+    background-color: #020617;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 6L4 18H20L12 6Z' fill='%23fbbf24'/%3E%3C/svg%3E");
+  }
+
+  /* 下ボタン (PCのみ復活) */
+  ::-webkit-scrollbar-button:vertical:end:increment {
+    display: block;
+    height: 28px;
+    width: 16px;
+    background-color: #020617;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 18L20 6H4L12 18Z' fill='%23fbbf24'/%3E%3C/svg%3E");
+  }
+
+  /* ホバーエフェクト */
+  ::-webkit-scrollbar-button:vertical:start:decrement:hover,
+  ::-webkit-scrollbar-button:vertical:end:increment:hover {
+    background-color: #0f172a;
+    box-shadow: inset 0 0 10px rgba(251, 191, 36, 0.2);
+  }
+}
+/* --- キラキラ星のアニメーション --- */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
 }
