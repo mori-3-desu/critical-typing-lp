@@ -58,14 +58,14 @@ const CONFIG = {
 
 const NEWS_ITEMS = [
   {
-    date: "2026.01.20",
-    tag: "Release",
-    text: "サイトを公開しました！ CRITICAL TYPING リリース！",
+    date: "2026.02.03",
+    tag: "fix",
+    text: "特定条件でタイマー演出が二重に出てしまう不具合を修正しました。",
   },
   {
-    date: "2026.01.19",
-    tag: "Info",
-    text: "ベータ版のテストプレイを開始しました。",
+    date: "2026.01.27",
+    tag: "Release",
+    text: "サイトを公開しました！ CRITICAL TYPING リリース！",
   },
 ];
 
