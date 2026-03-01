@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { StarryBackground } from "@/components/common/StarBackground";
 import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
@@ -30,33 +31,6 @@ const faqs = [
     answer: "スコア送信後、即座にサーバーへ反映されます。ランキングボードには最新の上位スコアが表示されます。"
   }
 ];
-
-// --- 背景エフェクト ---
-const StarryBackground = () => {
-  const [stars, setStars] = useState<any[]>([]);
-  useEffect(() => {
-    const starCount = 60;
-    const newStars = [];
-    for (let i = 0; i < starCount; i++) {
-      newStars.push({
-        id: i,
-        top: Math.random() * 100 + "%",
-        left: Math.random() * 100 + "%",
-        size: Math.random() * 2 + 1 + "px",
-        delay: Math.random() * 5 + "s",
-      });
-    }
-    setStars(newStars);
-  }, []);
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {stars.map((s) => (
-        <div key={s.id} className="absolute bg-white rounded-full animate-twinkle opacity-50"
-          style={{ top: s.top, left: s.left, width: s.size, height: s.size, animationDelay: s.delay }} />
-      ))}
-    </div>
-  );
-};
 
 // --- アコーディオン部品 ---
 function AccordionItem({ question, answer }: { question: string; answer: string }) {
