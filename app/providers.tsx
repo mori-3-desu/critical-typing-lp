@@ -1,11 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-
-type AnimationContextType = {
-  hasPlayedOpening: boolean;
-  setHasPlayedOpening: (value: boolean) => void;
-};
+import { type AnimationContextType } from "./constants";
 
 const AnimationContext = createContext<AnimationContextType | undefined>(undefined);
 

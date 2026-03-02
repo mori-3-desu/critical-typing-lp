@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { StarryBackground } from "@/components/common/StarBackground";
+import dynamic from "next/dynamic";
+
+// 普通の import の代わりに、dynamic を使って「ssr: false (サーバーで描画しない)」を指定する！
+const StarryBackground = dynamic(
+  () => import("@/components/common/StarBackground").then((mod) => mod.StarryBackground),
+  { ssr: false } // 👈 これが最強の魔法！
+);
 
 const GOOGLE_FORM_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_URL || "";
 // --- 猫ミミローディングコンポーネント ---

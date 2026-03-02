@@ -77,10 +77,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white p-[5px] h-screen overflow-hidden box-border`}
       >
-        {/* メインコンテナ
-            1. overflow-y-auto: スクロールはこの要素内で行う
-            2. gold-scrollbar: オリジナルのスクロールバーを適用
-        */}
         <div className="relative w-full h-full rounded-[20px] overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth gold-scrollbar">
           <Header />
 

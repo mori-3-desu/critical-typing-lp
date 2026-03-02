@@ -61,7 +61,7 @@ html {
 }
 
 /* 2. 【PC (768px以上)】 カスタム表示を有効化 */
-@media (min-width: 768px) {
+@media (width >= 768px) {
   /* スクロールバー本体を表示 */
   ::-webkit-scrollbar {
     display: block;
@@ -125,6 +125,11 @@ html {
     box-shadow: inset 0 0 10px rgba(251, 191, 36, 0.2);
   }
 }
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
 /* --- キラキラ星のアニメーション --- */
 @keyframes twinkle {
   0%,
@@ -137,8 +142,4 @@ html {
     transform: scale(1.2);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   }
-}
-
-.animate-twinkle {
-  animation: twinkle 3s ease-in-out infinite;
 }
