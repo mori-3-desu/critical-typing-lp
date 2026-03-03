@@ -1,3 +1,5 @@
+"use client";
+
 import { StarryBackground } from "@/components/common/StarBackground";
 import Link from "next/link";
 import { useRef } from "react";

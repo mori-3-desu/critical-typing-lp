@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { StarryBackground } from "@/components/common/StarBackground";
 import { generateStars } from "../utils/star";
