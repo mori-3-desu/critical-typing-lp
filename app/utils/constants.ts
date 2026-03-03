@@ -1,10 +1,15 @@
-/* page.tsx */
+/* 星の設定 */
 export const STAR_CONFIG = {
   COUNT: 60,
   STAR_TOP_LEFT: 100,
   STAR_PARTICLE_MIN_SIZE: 1,
   STAR_PARTICLE_MAX_SIZE: 3,
   STAR_DELAY: 5,
+
+  // Header
+  HDCOUNT: 12,
+  STAR_MIN_DURATION: 3,
+  STAR_DURATION: 4,
 } as const;
 
 export const HEADER_OFFSET_PX = 140;
@@ -69,6 +74,7 @@ export const CURTAIN_STAR_CONFIG = {
   SIZE_VAR: 3,
   MAX_DELAY: 3,
   GLOW_CHANCE: 0.6,
+  TRANS_OPACITY: 0.9,
 } as const;
 
 // 通常の背景の星空
