@@ -1,11 +1,11 @@
 "use client";
-
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react"
+import { type HeaderStar } from "@/app/types";
+import { HeaderStarBackground } from "@/components/common/HeaderStarBackground";
 
-export default function Header() {
+export default function Header({ stars }: { stars: HeaderStar[] }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const BASE_GAME_URL: string = process.env.NEXT_PUBLIC_GAME_URL ?? "";
 
   const handlePlayClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -16,32 +16,10 @@ export default function Header() {
     }
   };
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <header className="relative w-full z-50 font-[family-name:var(--font-rounded)] transition-all duration-300 bg-gradient-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-b-[4px] border-[#99FF99]/40 shadow-[0_4px_20px_rgba(148,163,184,0.2)] overflow-hidden">
-      {/* 背景のキラキラ星 */}
-      <div className="absolute inset-0 pointer-events-none">
-        {mounted &&
-          [...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute bg-white rounded-full animate-twinkle opacity-0"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 2 + 1}px`,
-                height: `${Math.random() * 2 + 1}px`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`,
-                boxShadow: "0 0 5px rgba(255, 255, 255, 0.8)",
-              }}
-            />
-          ))}
-      </div>
-
+      
+      <HeaderStarBackground stars={stars}/>
       <div className="w-full px-4 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-20 md:h-28">
           <div className="shrink-0 flex items-center group cursor-pointer select-none overflow-visible">
@@ -83,7 +61,11 @@ export default function Header() {
             />
             {/* リンク先をページに変更 */}
             <HeaderBtn href="/faq" text="Q&A" onClick={handlePlayClick} />
-            <HeaderBtn href="/contact" text="お問い合わせ" onClick={handlePlayClick}/>
+            <HeaderBtn
+              href="/contact"
+              text="お問い合わせ"
+              onClick={handlePlayClick}
+            />
           </nav>
 
           {/* ハンバーガーボタン (lg未満) */}
@@ -144,8 +126,18 @@ export default function Header() {
             />
             <div className="w-full h-[1px] bg-white/20 my-2"></div>
             {/* リンク先をページに変更 */}
-            <HeaderBtn href="/faq" text="Q&A" fullWidth onClick={handlePlayClick}/>
-            <HeaderBtn href="/contact" text="お問い合わせ" fullWidth onClick={handlePlayClick}/>
+            <HeaderBtn
+              href="/faq"
+              text="Q&A"
+              fullWidth
+              onClick={handlePlayClick}
+            />
+            <HeaderBtn
+              href="/contact"
+              text="お問い合わせ"
+              fullWidth
+              onClick={handlePlayClick}
+            />
           </div>
         </div>
       )}

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 // page.tsx
 export type Star = {
     id: number,
@@ -30,3 +32,23 @@ export type BgStar = {
   dur: string;
   size: string;
 };
+
+export type GameButtonProps = {
+  href: string;
+  children: ReactNode;
+  variant?: "primary" | "secondary";
+  size?: "large" | "medium"
+}
+
+/* Header.tsx */
+export type HeaderStar = {
+  id: number;
+  top: string;
+  left: string;
+  width: string;
+  height: string;
+  delay: string;
+  dur: string;
+  bshadow: string;
+}
+

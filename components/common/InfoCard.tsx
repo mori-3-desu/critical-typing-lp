@@ -1,7 +1,7 @@
 "use client";
 
+import { CONFIG } from "@/app/utils/constants";
 import React from "react";
-import { CONFIG } from "@/app/constants/constants";
 
 // InfoCardで使う色だけを定義 ）
 const CARD_COLORS = {
@@ -10,15 +10,17 @@ const CARD_COLORS = {
   border: "#ffe0cb",
 };
 
-export const InfoCard = ({ 
-  children, 
-  type = "main" 
-}: { 
-  children: React.ReactNode; 
-  type?: "main" | "news" 
+export const InfoCard = ({
+  children,
+  type = "main",
+}: {
+  children: React.ReactNode;
+  type?: "main" | "news";
 }) => {
   const isMain = type === "main";
-  const radiusClass = isMain ? "rounded-3xl lg:rounded-[2.5rem]" : "rounded-2xl";
+  const radiusClass = isMain
+    ? "rounded-3xl lg:rounded-[2.5rem]"
+    : "rounded-2xl";
 
   const style = {
     background: isMain ? CARD_COLORS.primary : CARD_COLORS.news,

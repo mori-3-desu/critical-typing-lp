@@ -1,13 +1,13 @@
-"use client";
-
+import { StarryBackground } from "@/components/common/StarBackground";
 import Link from "next/link";
 import { useRef } from "react";
-import { StarryBackground } from "@/components/common/StarBackground"
-import { ROMA_VARIATIONS, GROUP_CONFIG } from "./romatable";
-import { HEADER_OFFSET_PX } from "../constants/constants";
+import { HEADER_OFFSET_PX } from "../utils/constants";
+import { generateStars } from "../utils/star";
+import { GROUP_CONFIG, ROMA_VARIATIONS } from "./romatable";
 
 export default function KeymapPage() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const initialStars = generateStars();
 
   const scrollToSection = (id: string) => {
     if (!containerRef.current) return;
@@ -84,7 +84,7 @@ export default function KeymapPage() {
       `}</style>
 
       <div className="fixed inset-0 pointer-events-none bg-[url('/grid.svg')] opacity-20 mix-blend-overlay" />
-      <StarryBackground />
+      <StarryBackground stars={initialStars} />
 
       <main className="relative w-[95%] xl:w-[90%] max-w-[1800px] mx-auto py-6 md:py-10 flex flex-col items-center">
         <div className="w-full flex flex-col gap-3 mb-6">

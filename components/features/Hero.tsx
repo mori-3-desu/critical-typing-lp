@@ -1,23 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import { useAnimationContext } from "../../app/providers";
-import {
-  CONFIG,
-  PALETTE,
-  CURTAIN_GRADIENT,
-  CURTAIN_STAR_CONFIG,
-  BG_STAR_CONFIG,
-} from "@/app/constants/constants";
-import { type CurtainStar, type BgStar } from "@/app/constants/index";
+import { CONFIG, CURTAIN_GRADIENT, PALETTE } from "@/app/utils/constants";
 import { InfoCard } from "@/components/common/InfoCard";
 import News from "@/components/features/News";
+import { AnimatePresence, motion, Target } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useAnimationContext } from "../../app/providers";
+import { StarryBackground } from "../common/MainBgStar";
+import { CurtainDecorations } from "../common/CurtainDecorations";
+import { type CurtainStar, type GameButtonProps } from "@/app/types";
+
+// 星の型を定義
+type HeroProps = {
+  leftCurtainStars: CurtainStar[];
+  rightCurtainStars: CurtainStar[];
+};
 
 // --- 2. サブコンポーネント ---
 
-const CurtainPanel = ({ side }: { side: "left" | "right" }) => {
+const CurtainPanel = ({
+  side,
+  stars,
+}: {
+  side: "left" | "right";
+  stars: CurtainStar[];
+}) => {
   const isLeft = side === "left";
 
   const exitVariants = {
@@ -50,112 +58,8 @@ const CurtainPanel = ({ side }: { side: "left" | "right" }) => {
         transformOrigin: isLeft ? "top left" : "top right",
       }}
     >
-      <CurtainDecorations count={CONFIG.curtain.starCount} />
+      <CurtainDecorations stars={stars} />
     </motion.div>
-  );
-};
-
-const CurtainDecorations = ({ count }: { count: number }) => {
-  const [stars, setStars] = useState<CurtainStar[]>([]);
-
-  useEffect(() => {
-    const { MAX_TOP, MAX_LEFT, MIN_SIZE, SIZE_VAR, MAX_DELAY, GLOW_CHANCE } =
-      CURTAIN_STAR_CONFIG;
-
-    const newStars: CurtainStar[] = Array.from({ length: count }).map(
-      (_, i) => ({
-        id: i,
-        top: `${Math.random() * MAX_TOP}%`,
-        left: `${Math.random() * MAX_LEFT}%`,
-        size: `${Math.random() * SIZE_VAR + MIN_SIZE}px`,
-        delay: `-${Math.random() * MAX_DELAY}s`,
-        isGlow: Math.random() > GLOW_CHANCE,
-      }),
-    );
-    setStars(newStars);
-  }, [count]);
-
-  return (
-    <>
-      {stars.map((s) => (
-        <div
-          key={s.id}
-          className={`absolute bg-white rounded-full ${s.isGlow ? "shadow-[0_0_8px_rgba(255,255,255,0.9)]" : ""}`}
-          style={{
-            top: s.top,
-            left: s.left,
-            width: s.size,
-            height: s.size,
-            opacity: 0.9,
-            animation: `twinkle 3s infinite ease-in-out ${s.delay}`,
-          }}
-        />
-      ))}
-    </>
-  );
-};
-
-const StarryBackground = () => {
-  const [stars, setStars] = useState<BgStar[]>([]);
-
-  useEffect(() => {
-    const { MOBILE_BREAKPOINT, COUNT, GRID, OFFSET, SIZE, ANIM } =
-      BG_STAR_CONFIG;
-
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-    const starCount = isMobile ? COUNT.MOBILE : COUNT.PC;
-    const cols = isMobile ? GRID.MOBILE : GRID.PC;
-    const rows = isMobile ? GRID.MOBILE : GRID.PC;
-    const newStars: BgStar[] = [];
-
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        if (newStars.length >= starCount) break;
-
-        const xOffset = OFFSET.BASE + Math.random() * OFFSET.VAR;
-        const yOffset = OFFSET.BASE + Math.random() * OFFSET.VAR;
-        const left = c * (100 / cols) + xOffset / cols;
-        const top = r * (100 / rows) + yOffset / rows;
-
-        const baseSize = isMobile ? SIZE.MOBILE_BASE : SIZE.PC_BASE;
-        const sizeVar = isMobile ? SIZE.MOBILE_VAR : SIZE.PC_VAR;
-
-        const calculatedSize =
-          (Math.random() < SIZE.SMALL_CHANCE
-            ? baseSize + Math.random() * SIZE.SMALL_VAR
-            : baseSize + 1 + Math.random() * sizeVar) + "px";
-
-        newStars.push({
-          id: `${r}-${c}`,
-          top: `${top}%`,
-          left: `${left}%`,
-          delay: `-${Math.random() * ANIM.MAX_DELAY}s`,
-          dur: `${ANIM.MIN_DUR + Math.random() * ANIM.DUR_VAR}s`,
-          size: calculatedSize,
-        });
-      }
-    }
-    setStars(newStars);
-  }, []);
-
-  return (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      {stars.map((s) => (
-        <div
-          key={s.id}
-          className="absolute bg-white rounded-full animate-twinkle"
-          style={{
-            top: s.top,
-            left: s.left,
-            width: s.size,
-            height: s.size,
-            animationDelay: s.delay,
-            animationDuration: s.dur,
-            boxShadow: "0 0 3px 1px rgba(255, 255, 204, 0.8)",
-          }}
-        />
-      ))}
-    </div>
   );
 };
 
@@ -165,7 +69,7 @@ const GameButton = ({
   children,
   variant = "primary",
   size = "large",
-}: any) => {
+}: (GameButtonProps)) => {
   const sizeClasses =
     size === "large"
       ? // Mobile/Tablet: 画面85%幅、最大450px (これでタブレットでも崩れない)
@@ -208,7 +112,7 @@ const Highlight = ({
 );
 
 // --- 3. メインコンポーネント ---
-export default function Hero() {
+export default function Hero({leftCurtainStars, rightCurtainStars}: HeroProps) {
   const BASE_GAME_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
 
   const { hasPlayedOpening, setHasPlayedOpening } = useAnimationContext();
@@ -235,7 +139,7 @@ export default function Hero() {
     delay: shouldAnimate ? delay : 0,
   });
 
-  const initialStyle = (fromStyle: any, toStyle: any) =>
+  const initialStyle = (fromStyle: Target, toStyle: Target): Target =>
     shouldAnimate ? fromStyle : toStyle;
 
   return (
@@ -253,8 +157,8 @@ export default function Hero() {
               },
             }}
           >
-            <CurtainPanel side="left" />
-            <CurtainPanel side="right" />
+            <CurtainPanel side="left" stars={leftCurtainStars} />
+            <CurtainPanel side="right" stars={rightCurtainStars} />
           </motion.div>
         )}
       </AnimatePresence>
