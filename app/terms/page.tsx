@@ -9,7 +9,7 @@ export default function TermsPage() {
 
   return (
     <div
-      className="fixed inset-0 w-full h-[100dvh] text-white font-[family-name:var(--font-rounded)] overflow-y-auto z-[9999]"
+      className="fixed inset-0 w-full h-[100dvh] text-white font-[family-name:var(--font-rounded)] overflow-y-auto z-[9999] theme-red"
       style={{
         background: "linear-gradient(to bottom, #28143C, #B43C64)",
         boxShadow:

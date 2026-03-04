@@ -69,7 +69,7 @@ const GameButton = ({
   children,
   variant = "primary",
   size = "large",
-}: (GameButtonProps)) => {
+}: GameButtonProps) => {
   const sizeClasses =
     size === "large"
       ? // Mobile/Tablet: 画面85%幅、最大450px (これでタブレットでも崩れない)
@@ -112,7 +112,10 @@ const Highlight = ({
 );
 
 // --- 3. メインコンポーネント ---
-export default function Hero({leftCurtainStars, rightCurtainStars}: HeroProps) {
+export default function Hero({
+  leftCurtainStars,
+  rightCurtainStars,
+}: HeroProps) {
   const BASE_GAME_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
 
   const { hasPlayedOpening, setHasPlayedOpening } = useAnimationContext();
@@ -164,6 +167,9 @@ export default function Hero({leftCurtainStars, rightCurtainStars}: HeroProps) {
       </AnimatePresence>
 
       <style jsx global>{`
+        .animate-twinkle {
+          animation: twinkle ease-in-out infinite alternate;
+        }
         @keyframes twinkle {
           0%,
           100% {
@@ -173,77 +179,6 @@ export default function Hero({leftCurtainStars, rightCurtainStars}: HeroProps) {
           50% {
             opacity: 1;
             transform: scale(1.2);
-          }
-        }
-        @keyframes shine {
-          0% {
-            background-position: 200% center;
-          }
-          100% {
-            background-position: -200% center;
-          }
-        }
-        .animate-shine {
-          animation: shine 6s linear infinite;
-        }
-        .animate-twinkle {
-          animation: twinkle ease-in-out infinite alternate;
-        }
-
-        ::-webkit-scrollbar {
-          display: none;
-        }
-        ::-webkit-scrollbar-button {
-          display: none;
-        }
-
-        @media (min-width: 1024px) {
-          ::-webkit-scrollbar {
-            display: block;
-            width: 16px;
-          }
-          ::-webkit-scrollbar-track {
-            background-color: #020617;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-          }
-          ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #fcd34d 0%, #d97706 100%);
-            border-radius: 99px;
-            border: 3px solid #020617;
-            box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.4);
-          }
-          ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #fffbeb 0%, #f59e0b 100%);
-          }
-          ::-webkit-scrollbar-button {
-            display: none;
-            height: 0;
-            width: 0;
-          }
-          ::-webkit-scrollbar-button:vertical:start:decrement {
-            display: block;
-            height: 28px;
-            width: 16px;
-            background-color: #020617;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 16px;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 6L4 18H20L12 6Z' fill='%23fbbf24'/%3E%3C/svg%3E");
-          }
-          ::-webkit-scrollbar-button:vertical:end:increment {
-            display: block;
-            height: 28px;
-            width: 16px;
-            background-color: #020617;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 16px;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 18L20 6H4L12 18Z' fill='%23fbbf24'/%3E%3C/svg%3E");
-          }
-          ::-webkit-scrollbar-button:vertical:start:decrement:hover,
-          ::-webkit-scrollbar-button:vertical:end:increment:hover {
-            background-color: #0f172a;
-            box-shadow: inset 0 0 10px rgba(251, 191, 36, 0.2);
           }
         }
       `}</style>
@@ -261,45 +196,6 @@ export default function Hero({leftCurtainStars, rightCurtainStars}: HeroProps) {
       <StarryBackground />
 
       <div className="z-10 w-full lg:w-[95vw] flex flex-col items-center text-center mx-auto max-w-7xl">
-        {/* タイトル */}
-        <motion.div
-          initial={initialStyle(
-            { opacity: 0, scale: 0.8 },
-            { opacity: 1, scale: 1 },
-          )}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={commonTransition(0.5, 0.8)}
-          className="w-full flex justify-center mb-6 lg:mb-[1.5vw]"
-        >
-          <h1 className="flex flex-col lg:flex-row gap-[0.5vw] lg:gap-[2vw] items-center whitespace-nowrap leading-none">
-            <span
-              className="text-[clamp(40px,9vw,200px)] font-[900] tracking-wider animate-shine bg-[size:200%_auto]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, #fff9c4 0%, #fbbf24 40%, #ffffff 50%, #fbbf24 60%, #fff9c4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                filter: "drop-shadow(0 0 1.5vw rgba(253, 224, 71, 0.4))",
-              }}
-            >
-              CRITICAL
-            </span>
-            <span
-              className="text-[clamp(40px,9vw,200px)] font-[900] tracking-wider animate-shine bg-[size:200%_auto]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, #fff9c4 0%, #fbbf24 40%, #ffffff 50%, #fbbf24 60%, #fff9c4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                filter: "drop-shadow(0 0 1.5vw rgba(253, 224, 71, 0.4))",
-                animationDelay: "0.5s",
-              }}
-            >
-              TYPING
-            </span>
-          </h1>
-        </motion.div>
-
         {/* メインカード */}
         <motion.div
           initial={initialStyle({ opacity: 0, y: 20 }, { opacity: 1, y: 0 })}

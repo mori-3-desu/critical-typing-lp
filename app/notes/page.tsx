@@ -9,45 +9,12 @@ export default function NotesPage() {
 
   return (
     <div 
-      className="fixed inset-0 w-full h-100dvh text-white font-[family-name:var(--font-rounded)] overflow-y-auto z-[9999]"
+      className="fixed inset-0 w-full h-100dvh text-white font-[family-name:var(--font-rounded)] overflow-y-auto z-[9999] theme-red"
       style={{
         background: "linear-gradient(to bottom, #28143C, #B43C64)", 
         boxShadow: "0 0 20px rgba(255, 100, 150, 0.5), 0 20px 50px rgba(0, 0, 0, 0.5)"
       }}
     >
-      <style jsx global>{`
-        /* デフォルト(スマホ)はスクロールバー非表示 */
-        ::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* 1024px以上(13インチPCなど)でスクロールバーを表示 */
-        @media (min-width: 1024px) {
-          ::-webkit-scrollbar { display: block; width: 14px; }
-          * { -ms-overflow-style: auto; scrollbar-width: auto; }
-
-          ::-webkit-scrollbar-track { 
-            background-color: rgba(30, 27, 75, 0.5); 
-            border-left: 1px solid rgba(255, 255, 255, 0.05); 
-          }
-          ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #fff9c4 0%, #fbbf24 40%, #ffffff 50%, #fbbf24 60%, #fff9c4 100%);
-            border-radius: 99px;
-            border: 3px solid rgba(30, 27, 75, 1);
-            background-clip: content-box;
-            box-shadow: inset 0 0 10px rgba(251, 191, 36, 0.5);
-          }
-          ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #ffffff 0%, #fcd34d 100%);
-            border: 3px solid rgba(30, 27, 75, 1);
-            background-clip: content-box;
-          }
-        }
-
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
-      `}</style>
-
-      <div className="fixed inset-0 pointer-events-none bg-[url('/grid.svg')] opacity-20 mix-blend-overlay" />
       <StarryBackground stars={initialStars}/>
 
       <main className="relative w-[95%] xl:w-[80%] max-w-[1000px] mx-auto py-10 flex flex-col items-center">
