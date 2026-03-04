@@ -14,6 +14,17 @@ export type AnimationContextType = {
   setHasPlayedOpening: (value: boolean) => void;
 };
 
+/* Contact */
+export type SubPageHeaderProps = {
+  title: string;
+};
+
+/* Faq */
+export type FaqProps = {
+  question: string;
+  answer: string;
+};
+
 /* Hero.tsx */
 export type CurtainStar = {
   id: number;

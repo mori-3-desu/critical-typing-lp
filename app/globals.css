@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
-/* v4では @theme ブロックの中に設定を書きます */
+/* ==========================================
+   🎨 Tailwind v4 カスタムテーマ設定
+   ========================================== */
 @theme {
-  /* アニメーションの定義 */
-  --animate-blob: blob 7s infinite;
   --font-rounded: var(--font-rounded);
 
-  /* キーフレーム（動きの内容） */
+  /* blobアニメーションの登録 */
+  --animate-blob: blob 7s infinite;
   @keyframes blob {
-    0% {
+    0%,
+    100% {
       transform: translate(0px, 0px) scale(1);
     }
     33% {
@@ -17,9 +19,6 @@
     66% {
       transform: translate(-20px, 20px) scale(0.9);
     }
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
   }
 }
 
@@ -27,30 +26,34 @@ html {
   scroll-behavior: smooth;
 }
 
-/* アニメーション定義（v3ではここで書くかtailwind.config.ts推奨ですが、CSSでも動きます） */
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
+/* ==========================================
+   ✨ 汎用アニメーションクラス
+   ========================================== */
 .animation-delay-2000 {
   animation-delay: 2s;
 }
-/* === スクロールバー制御 (ここから修正版) === */
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    /* 0だと完全に消えて不自然になることがあるので0.3を採用 */
+    opacity: 0.3;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* ==========================================
+   全ページ共通：カスタムスクロールバー
+   ========================================== */
 
 /* 1. 【スマホ (デフォルト)】 強制的に非表示 */
 ::-webkit-scrollbar {
@@ -59,13 +62,21 @@ html {
 ::-webkit-scrollbar-button {
   display: none;
 }
+* {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
-/* 2. 【PC (768px以上)】 カスタム表示を有効化 */
-@media (width >= 768px) {
+/* 2. 【PC (1024px以上)】 カスタム表示を有効化 */
+@media (width >= 1024px) {
   /* スクロールバー本体を表示 */
   ::-webkit-scrollbar {
     display: block;
     width: 16px;
+  }
+  * {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
   }
 
   /* 背景トラック */
@@ -80,21 +91,59 @@ html {
     border-radius: 99px;
     border: 3px solid #020617;
     box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.4);
+    background-clip: content-box;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #fffbeb 0%, #f59e0b 100%);
   }
 
-  /* --- 矢印ボタン制御 --- */
+  /* ==========================================
+     水色テーマの時のつまみ
+   ========================================== */
+  .theme-blue::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #a5f3fc 0%, #06b6d4 100%);
+  }
 
-  /* まずボタン領域を確保 */
+  .theme-blue::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #cffafe 0%, #0891b2 100%);
+  }
+
+  /* ついでに、矢印ボタンの色も変えたい場合はこんな感じで書けます */
+  /* （※ SVG画像の fill='%2306b6d4' で水色(#06b6d4)を指定しています） */
+  .theme-blue::-webkit-scrollbar-button:vertical:start:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 6L4 18H20L12 6Z' fill='%2306b6d4'/%3E%3C/svg%3E");
+  }
+  .theme-blue::-webkit-scrollbar-button:vertical:end:increment {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 18L20 6H4L12 18Z' fill='%2306b6d4'/%3E%3C/svg%3E");
+  }
+
+  /* ==========================================
+     赤色テーマの時のつまみ
+   ========================================== */
+  .theme-red::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #fca5a5 0%, #ef4444 100%);
+  }
+
+  .theme-red::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #fecaca 0%, #dc2626 100%);
+  }
+
+  /* 矢印ボタンの色（※ SVG画像の fill='%23ef4444' で赤色(#ef4444)を指定） */
+  .theme-red::-webkit-scrollbar-button:vertical:start:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 6L4 18H20L12 6Z' fill='%23ef4444'/%3E%3C/svg%3E");
+  }
+  .theme-red::-webkit-scrollbar-button:vertical:end:increment {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 18L20 6H4L12 18Z' fill='%23ef4444'/%3E%3C/svg%3E");
+  }
+
+  /* --- 矢印ボタン制御 --- */
   ::-webkit-scrollbar-button {
-    display: none; /* 基本は消す */
+    display: none;
     height: 0;
     width: 0;
   }
 
-  /* 上ボタン (PCのみ復活) */
+  /* 上ボタン */
   ::-webkit-scrollbar-button:vertical:start:decrement {
     display: block;
     height: 28px;
@@ -106,7 +155,7 @@ html {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 6L4 18H20L12 6Z' fill='%23fbbf24'/%3E%3C/svg%3E");
   }
 
-  /* 下ボタン (PCのみ復活) */
+  /* 下ボタン */
   ::-webkit-scrollbar-button:vertical:end:increment {
     display: block;
     height: 28px;
@@ -123,23 +172,5 @@ html {
   ::-webkit-scrollbar-button:vertical:end:increment:hover {
     background-color: #0f172a;
     box-shadow: inset 0 0 10px rgba(251, 191, 36, 0.2);
-  }
-}
-
-.animate-twinkle {
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-/* --- キラキラ星のアニメーション --- */
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   }
 }
