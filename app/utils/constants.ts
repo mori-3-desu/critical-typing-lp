@@ -12,7 +12,7 @@ export const STAR_CONFIG = {
   STAR_DURATION: 4,
 } as const;
 
-export const HEADER_OFFSET_PX = 140;
+export const HEADER_OFFSET_PX = 140 as const;
 
 /* Hero.tsx */
 export const CONFIG = {

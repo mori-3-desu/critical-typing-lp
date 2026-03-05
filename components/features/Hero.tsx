@@ -4,20 +4,18 @@ import { CONFIG, CURTAIN_GRADIENT, PALETTE } from "@/app/utils/constants";
 import { InfoCard } from "@/components/common/InfoCard";
 import News from "@/components/features/News";
 import { AnimatePresence, motion, Target } from "framer-motion";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAnimationContext } from "../../app/providers";
 import { StarryBackground } from "../common/MainBgStar";
 import { CurtainDecorations } from "../common/CurtainDecorations";
-import { type CurtainStar, type GameButtonProps } from "@/app/types";
+import { type CurtainStar } from "@/app/types";
+import { GameButton } from "../common/GameButton";
 
 // 星の型を定義
 type HeroProps = {
   leftCurtainStars: CurtainStar[];
   rightCurtainStars: CurtainStar[];
 };
-
-// --- 2. サブコンポーネント ---
 
 const CurtainPanel = ({
   side,
@@ -60,39 +58,6 @@ const CurtainPanel = ({
     >
       <CurtainDecorations stars={stars} />
     </motion.div>
-  );
-};
-
-// PCでの「迫力」を復活させつつ、タブレット以下では崩れないように調整
-const GameButton = ({
-  href,
-  children,
-  variant = "primary",
-  size = "large",
-}: GameButtonProps) => {
-  const sizeClasses =
-    size === "large"
-      ? // Mobile/Tablet: 画面85%幅、最大450px (これでタブレットでも崩れない)
-        // PC (lg以上): 画面45%幅 (迫力復活)、最大1000pxまで許容
-        "w-[85vw] max-w-md lg:w-[45vw] lg:max-w-5xl h-16 lg:h-[5.5vw] text-xl lg:text-[1.8vw] border-[3px] lg:border-[0.3vw]"
-      : // Mobile/Tablet: 画面40%幅 (2つ並べても入る)、最大200px
-        // PC (lg以上): 画面21.5%幅 (迫力復活)、最大500pxまで許容
-        "w-[40vw] max-w-[200px] lg:w-[21.5vw] lg:max-w-2xl h-14 lg:h-[4.5vw] text-xs lg:text-[1.1vw] border-[2px] lg:border-[0.3vw]";
-
-  const bg =
-    variant === "primary" ? CONFIG.ui.btnPrimary : CONFIG.ui.btnSecondary;
-
-  return (
-    <Link
-      href={href}
-      target={href.startsWith("http") ? "_blank" : "_self"}
-      rel="noopener noreferrer"
-      className={`relative flex items-center justify-center font-extrabold text-white rounded-full border-white shadow-lg hover:scale-105 transition-transform overflow-hidden leading-none ${sizeClasses}`}
-      style={{ background: bg, textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}
-    >
-      <span className="relative z-10 px-2">{children}</span>
-      <div className="absolute top-1 left-4 w-3/4 h-1/2 bg-white/30 rounded-full pointer-events-none" />
-    </Link>
   );
 };
 
@@ -279,22 +244,26 @@ export default function Hero({
           transition={commonTransition(1.1, 0.5)}
           className="flex flex-col items-center gap-4 lg:gap-[1.5vw] w-full mb-10 lg:mb-[3vw]"
         >
-          <GameButton href={BASE_GAME_URL} size="large">
-            CRITICAL TYPINGを始める
-          </GameButton>
+          <GameButton
+            href={BASE_GAME_URL}
+            size="large"
+            label="CRITICAL TYPINGを始める"
+          />
 
           <div className="flex flex-row gap-4 lg:gap-[1.5vw] w-full justify-center">
-            <GameButton href="/keymap" variant="secondary" size="medium">
-              ローマ字対応表
-            </GameButton>
+            <GameButton
+              href="/keymap"
+              variant="secondary"
+              size="medium"
+              label="ローマ字対応表"
+            />
 
             <GameButton
               href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
               variant="secondary"
               size="medium"
-            >
-              静かに始める (ミュート)
-            </GameButton>
+              label="静かに始める (ミュート)"
+            />
           </div>
           <p
             className="text-[10px] lg:text-[0.9vw] font-bold mt-2 lg:mt-[0.8vw] shadow-black drop-shadow-md opacity-90"
