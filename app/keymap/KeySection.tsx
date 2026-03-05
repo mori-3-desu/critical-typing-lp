@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GROUP_CONFIG, ROMA_VARIATIONS } from "./Romatable";
+import { GROUP_CONFIG, ROMA_VARIATIONS } from "./RomaTable";
 
 type Props = {
   scrollToSection: (id: string) => void;
