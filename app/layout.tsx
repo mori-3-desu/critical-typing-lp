@@ -13,7 +13,7 @@ const mPlusRounded = M_PLUS_Rounded_1c({
   variable: "--font-rounded",
 });
 
-// ★SEO設定: サイトの基本URL
+// SEO設定: サイトの基本URL
 const SITE_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
 
 export const metadata: Metadata = {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "エンジニア",
   ],
 
-  // SNSシェア設定 (OGP)
+  // SNSシェア設定
   openGraph: {
     title: "CRITICAL TYPING | 打ち心地が気持ちいい無料タイピング",
     description:

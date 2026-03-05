@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-// page.tsx
+// 星空アニメーション基準
 export type Star = {
     id: number,
     top: string,
@@ -46,7 +46,7 @@ export type BgStar = {
 
 export type GameButtonProps = {
   href: string;
-  children: ReactNode;
+  label: ReactNode;
   variant?: "primary" | "secondary";
   size?: "large" | "medium"
 }
