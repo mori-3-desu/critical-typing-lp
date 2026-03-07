@@ -43,6 +43,7 @@ const CurtainPanel = ({
   return (
     <motion.div
       initial="initial"
+      animate={{ opacity: 1 }}
       exit="exit"
       variants={exitVariants}
       className="relative w-1/2 h-full"
@@ -163,7 +164,7 @@ export default function Hero({
       <div className="z-10 w-full lg:w-[95vw] flex flex-col items-center text-center mx-auto max-w-7xl">
         {/* メインカード */}
         <motion.div
-          initial={initialStyle({ opacity: 0, y: 20 }, { opacity: 1, y: 0 })}
+          initial={initialStyle({ opacity: 1, y: 20 }, { opacity: 1, y: 0 })}
           animate={{ opacity: 1, y: 0 }}
           transition={commonTransition(0.8, 0.8)}
           className="w-[95vw] max-w-3xl lg:w-[60vw] lg:max-w-none"
@@ -225,7 +226,7 @@ export default function Hero({
 
         {/* 誘導 & ボタン */}
         <motion.div
-          initial={initialStyle({ opacity: 0 }, { opacity: 1 })}
+          initial={initialStyle({ opacity: 1 }, { opacity: 1 })}
           animate={{ opacity: 1 }}
           transition={commonTransition(1.0)}
           className="mb-4 lg:mb-[1.5vw] mt-4 lg:mt-[0.5vw] animate-bounce"
@@ -239,7 +240,7 @@ export default function Hero({
         </motion.div>
 
         <motion.div
-          initial={initialStyle({ opacity: 0, y: 20 }, { opacity: 1, y: 0 })}
+          initial={initialStyle({ opacity: 1, y: 20 }, { opacity: 1, y: 0 })}
           animate={{ opacity: 1, y: 0 }}
           transition={commonTransition(1.1, 0.5)}
           className="flex flex-col items-center gap-4 lg:gap-[1.5vw] w-full mb-10 lg:mb-[3vw]"

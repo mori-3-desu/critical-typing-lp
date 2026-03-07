@@ -72,7 +72,6 @@ html {
   /* スクロールバー本体を表示 */
   ::-webkit-scrollbar {
     display: block;
-    width: 16px;
   }
   * {
     -ms-overflow-style: auto;
@@ -146,8 +145,7 @@ html {
   /* 上ボタン */
   ::-webkit-scrollbar-button:vertical:start:decrement {
     display: block;
-    height: 28px;
-    width: 16px;
+    height: 16px;
     background-color: #020617;
     background-repeat: no-repeat;
     background-position: center;
@@ -158,8 +156,7 @@ html {
   /* 下ボタン */
   ::-webkit-scrollbar-button:vertical:end:increment {
     display: block;
-    height: 28px;
-    width: 16px;
+    height: 16px;
     background-color: #020617;
     background-repeat: no-repeat;
     background-position: center;

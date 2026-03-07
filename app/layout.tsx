@@ -6,10 +6,15 @@ import { generateHeaderStars } from "./utils/star";
 import Footer from "@/components/features/Footer";
 import { AnimationProvider } from "./providers";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["400", "700", "800"],
-  subsets: ["latin"],
+  display: "swap",
+  preload: false,
   variable: "--font-rounded",
 });
 
@@ -75,14 +80,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const headerStars = generateHeaderStars();
-  
+
   return (
     <html lang="ja">
       {/* 外枠（白い額縁） */}
       <body
         className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white p-[5px] h-screen overflow-hidden box-border`}
       >
-        <div className="relative w-full h-full rounded-[20px] overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth gold-scrollbar">
+        <div className="relative w-full h-full rounded-[20px] overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
           <Header stars={headerStars} />
 
           {/* ページ遷移アニメーションの管理 */}
