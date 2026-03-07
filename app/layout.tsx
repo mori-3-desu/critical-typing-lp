@@ -13,7 +13,7 @@ const inter = Inter({
 });
 const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["400", "700", "800"],
-  display: "swap",
+  display: "block",
   preload: false,
   variable: "--font-rounded",
 });
