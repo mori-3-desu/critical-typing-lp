@@ -155,7 +155,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
           }
         }
         .animate-twinkle {
-          animation: twinkle linear infinite;
+          animation: twinkle 3s linear infinite alternate;
         }
       `}</style>
     </header>

@@ -133,8 +133,6 @@ export default function Hero({
       </AnimatePresence>
 
       <style jsx global>{`
-        .animate-twinkle {
-          animation: twinkle ease-in-out infinite alternate;
         }
         @keyframes twinkle {
           0%,
@@ -147,6 +145,8 @@ export default function Hero({
             transform: scale(1.2);
           }
         }
+        .animate-twinkle {
+          animation: twinkle 3s ease-in-out infinite alternate;
       `}</style>
 
       <div
