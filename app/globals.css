@@ -34,7 +34,7 @@ html {
 }
 
 .animate-twinkle {
-  animation: twinkle 3s ease-in-out infinite;
+  animation: twinkle 3s ease-in-out infinite alternate;
 }
 
 @keyframes twinkle {

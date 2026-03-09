@@ -7,10 +7,15 @@ export function AccordionItem({ question, answer }: FaqProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border border-white/40 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm shadow-sm transition-all hover:bg-white/20">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 20 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="border border-white/40 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm shadow-sm transition-all hover:bg-white/20"
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full p-5 text-left transition-colors"
+        className="flex items-center justify-between w-full p-5 text-left transition-colors cursor-pointer"
       >
         <div className="font-bold text-white text-base md:text-lg flex items-start gap-3 w-[90%]">
           <span className="text-cyan-200 text-xl shrink-0 leading-tight">
@@ -39,8 +44,6 @@ export function AccordionItem({ question, answer }: FaqProps) {
             initial={{ height: 0, opacity: 1 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="bg-black/10 border-t border-white/20"
           >
             <div className="p-5 text-white leading-relaxed font-medium flex items-start gap-3">
               <span className="font-bold text-cyan-300 text-lg shrink-0 pt-[2px]">
@@ -51,6 +54,6 @@ export function AccordionItem({ question, answer }: FaqProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
