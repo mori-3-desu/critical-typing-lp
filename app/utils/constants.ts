@@ -20,6 +20,12 @@ export const CONFIG = {
     animDuration: 2.0,
     openDelay: 100,
     starCount: 40,
+
+    physics: {
+      skewAngle: 15,
+      shrinkScale: [1, 0.9, 1],
+      keyframeTimes: [0, 0.4, 1]
+    }
   },
   ui: {
     cardBorderMain: "min(0.8vw, 6px)",
@@ -29,7 +35,7 @@ export const CONFIG = {
     btnSecondary:
       "linear-gradient(135deg, #fcd34d 0%, #fbbf24 40%, #c084fc 100%)",
   },
-} as const;
+};
 
 /* それぞれのテーマカラー */
 export const PALETTE = {
