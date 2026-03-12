@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react"
+import { useState } from "react";
 import { type HeaderStar } from "@/app/types";
 import { HeaderStarBackground } from "@/components/common/HeaderStarBackground";
 
@@ -18,8 +18,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
 
   return (
     <header className="relative w-full z-50 font-[family-name:var(--font-rounded)] transition-all duration-300 bg-gradient-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-b-[4px] border-[#99FF99]/40 shadow-[0_4px_20px_rgba(148,163,184,0.2)] overflow-hidden">
-      
-      <HeaderStarBackground stars={stars}/>
+      <HeaderStarBackground stars={stars} />
       <div className="w-full px-4 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-20 md:h-28">
           <div className="shrink-0 flex items-center group cursor-pointer select-none overflow-visible">
@@ -72,6 +71,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label="メニューを開く"
               className="p-2 rounded-lg text-[#fff9c4] hover:bg-white/10 transition-colors border border-white/20"
             >
               {isOpen ? (
@@ -124,7 +124,6 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
               fullWidth
               onClick={handlePlayClick}
             />
-            <div className="w-full h-[1px] bg-white/20 my-2"></div>
             {/* リンク先をページに変更 */}
             <HeaderBtn
               href="/faq"
@@ -226,21 +225,25 @@ function HeaderBtn({
       target={href.startsWith("http") ? "_blank" : "_self"}
       rel="noopener noreferrer"
       className={`
-        relative group flex items-center justify-center
+        relative group flex items-center justify-center bg-transparent
         font-bold text-white tracking-wide whitespace-nowrap
-        text-xs lg:text-base py-2 px-3 lg:px-6 lg:py-2.5
-        rounded-full border-2 border-white shadow-[0_4px_10px_rgba(0,0,0,0.15)] 
-        transition-all duration-200 ease-out hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg active:scale-95 active:translate-y-0 overflow-hidden 
+        text-base lg:text-xl px-3 lg:px-6 
+        transition-all duration-300 ease-out
+        hover:scale-105 hover:-translate-y-0.5 hover:text-[#ffd700] 
+        active:translate-y-1.5
         ${fullWidth ? "w-full max-w-xs" : ""}
       `}
-      style={{
-        background:
-          "linear-gradient(135deg, #fcd34d 0%, #fbbf24 40%, #c084fc 100%)",
-        textShadow: "1px 1px 1px rgba(0, 0, 0, 0.2)",
-      }}
     >
-      <span className="relative z-10">{text}</span>
-      <div className="absolute top-[10%] left-[10%] w-[80%] h-[40%] bg-white/30 rounded-full pointer-events-none" />
+      <span
+        className="
+        relative z-10 border-b border-transparent
+        transition-colors duration-300 ease-out 
+        group-hover:border-[#ffd700]
+        "
+      >
+        {text}
+      </span>
+      <div className="absolute top-[10%] left-[10%] w-[80%] h-[40%] pointer-events-none" />
     </Link>
   );
 }
