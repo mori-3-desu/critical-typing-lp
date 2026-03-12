@@ -22,7 +22,7 @@ const mPlusRounded = M_PLUS_Rounded_1c({
 const SITE_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(SITE_URL) || "",
   title: {
     default: "CRITICAL TYPING",
     template: "%s | CRITICAL TYPING",

@@ -1,0 +1,67 @@
+import { PALETTE } from "@/app/utils/constants";
+import { GameButton } from "../common/GameButton";
+import { motion } from "framer-motion";
+import { useAppAnimation } from "@/app/hooks/useAppAnimation";
+
+const BASE_GAME_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
+
+export const GuideButtonNote = () => {
+  const { commonTransition, initialStyle } = useAppAnimation();
+
+  return (
+    <>
+      <motion.div
+        initial={initialStyle({ opacity: 1 }, { opacity: 1 })}
+        animate={{ opacity: 1 }}
+        transition={commonTransition(1.0)}
+        className="mb-4 lg:mb-[1.5vw] mt-4 lg:mt-[0.5vw] animate-bounce"
+      >
+        <p
+          className="text-sm lg:text-[1.4vw] font-bold drop-shadow-md tracking-widest"
+          style={{ color: PALETTE.highlight }}
+        >
+          ▼ タイピングゲームはこちらから ▼
+        </p>
+      </motion.div>
+
+      <motion.div
+        initial={initialStyle({ opacity: 1, y: 20 }, { opacity: 1, y: 0 })}
+        animate={{ opacity: 1, y: 0 }}
+        transition={commonTransition(1.1, 0.5)}
+        className="flex flex-col items-center gap-4 lg:gap-[1.5vw] w-full mb-10 lg:mb-[3vw]"
+      >
+        <GameButton
+          href={BASE_GAME_URL}
+          size="large"
+          label="CRITICAL TYPINGを始める"
+        />
+
+        <div className="flex flex-row gap-4 lg:gap-[1.5vw] w-full justify-center">
+          <GameButton
+            href="/keymap"
+            variant="secondary"
+            size="medium"
+            label="ローマ字対応表"
+          />
+
+          <GameButton
+            href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
+            variant="secondary"
+            size="medium"
+            label="静かに始める (ミュート)"
+          />
+        </div>
+        <p
+          className="text-[10px] lg:text-[0.9vw] font-bold mt-2 lg:mt-[0.8vw] shadow-black drop-shadow-md opacity-90"
+          style={{ color: "#fffad4" }}
+        >
+          ※ タイトル画面の設定から音量の調整や名前の変更が行えます！
+          <br />
+          初回ログイン時は名前入力しないと出てこないのでご注意ください🙇‍♂️
+          <br />
+          もしゲーム中反応しなくなりましたら一度画面をクリックしてみてください！
+        </p>
+      </motion.div>
+    </>
+  );
+};
