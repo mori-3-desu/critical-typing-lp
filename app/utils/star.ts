@@ -3,7 +3,7 @@ import { STAR_CONFIG, CURTAIN_STAR_CONFIG } from "@/app/utils/constants";
 
 const {
   COUNT,
-  HDCOUNT,
+  HEADER_COUNT,
   STAR_TOP_LEFT,
   STAR_PARTICLE_MIN_SIZE,
   STAR_PARTICLE_MAX_SIZE,
@@ -44,7 +44,7 @@ export const generateCurtainStars = (count: number): CurtainStar[] => {
 
 // ヘッダーの星を計算する専用関数
 export const generateHeaderStars = (): HeaderStar[] => {
-  return Array.from({ length: HDCOUNT }).map((_, i) => ({
+  return Array.from({ length: HEADER_COUNT }).map((_, i) => ({
     id: i,
     top: `${Math.random() * STAR_TOP_LEFT}%`,
     left: `${Math.random() * STAR_TOP_LEFT}%`,

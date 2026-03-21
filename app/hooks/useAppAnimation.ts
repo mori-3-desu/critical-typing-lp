@@ -1,5 +1,5 @@
 import { useAnimationContext } from "../providers";
-import { Target } from "framer-motion";
+import { TargetAndTransition } from "framer-motion";
 
 export const useAppAnimation = () => {
   const { hasPlayedOpening } = useAnimationContext();
@@ -9,7 +9,7 @@ export const useAppAnimation = () => {
     delay: shouldAnimate ? delay : 0,
   });
 
-  const initialStyle = (fromStyle: Target, toStyle: Target): Target =>
+  const initialStyle = (fromStyle: TargetAndTransition, toStyle: TargetAndTransition): TargetAndTransition =>
     shouldAnimate ? fromStyle : toStyle;
 
   return { shouldAnimate, commonTransition, initialStyle };

@@ -5,7 +5,7 @@ import News from "@/components/features/News";
 import { CurtainAnim } from "./CurtainAnim";
 import { motion, Target } from "framer-motion";
 import { StarryBackground } from "../common/MainBgStar";
-import { type CurtainStar } from "@/app/types"; // ←インポートされていなければ追加
+import { type CurtainStar } from "@/app/types";
 import { PlayGuide } from "./PlayGuide";
 import { GuideButtonNote } from "./GuideButtonNote";
 import { useAppAnimation } from "@/app/hooks/useAppAnimation";

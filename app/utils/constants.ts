@@ -7,7 +7,7 @@ export const STAR_CONFIG = {
   STAR_DELAY: 5,
 
   // Header
-  HDCOUNT: 12,
+  HEADER_COUNT: 12,
   STAR_MIN_DURATION: 3,
   STAR_DURATION: 4,
 } as const;
