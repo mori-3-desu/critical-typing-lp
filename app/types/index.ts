@@ -2,11 +2,11 @@ import { ReactNode } from "react";
 
 // 星空アニメーション基準
 export type Star = {
-    id: number,
-    top: string,
-    left: string,
-    size: string,
-    delay: string
+  id: number;
+  top: string;
+  left: string;
+  size: string;
+  delay: string;
 };
 
 export type AnimationContextType = {
@@ -23,14 +23,7 @@ export type FaqProps = {
   answer: string;
 };
 
-export type CurtainStar = {
-  id: number;
-  top: string;
-  left: string;
-  size: string;
-  delay: string;
-  isGlow: boolean;
-};
+export type CurtainStar = Star & { isGlow: boolean };
 
 export type BgStar = {
   id: string;
@@ -45,8 +38,8 @@ export type GameButtonProps = {
   href: string;
   label: ReactNode;
   variant?: "primary" | "secondary";
-  size?: "large" | "medium"
-}
+  size?: "large" | "medium";
+};
 
 export type HeaderStar = {
   id: number;
@@ -57,5 +50,4 @@ export type HeaderStar = {
   delay: string;
   dur: string;
   bshadow: string;
-}
-
+};

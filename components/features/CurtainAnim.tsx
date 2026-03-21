@@ -5,15 +5,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CurtainDecorations } from "../common/CurtainDecorations";
 import { type CurtainStar } from "@/app/types";
-import { useAnimationContext } from "../../app/providers"; 
+import { useAnimationContext } from "@/app/providers"; 
 
-// Propsの型を定義
 type CurtainAnimProps = {
   leftCurtainStars: CurtainStar[];
   rightCurtainStars: CurtainStar[];
 };
 
-// CONFIGから値を抽出
 const { animDuration, openDelay } = CONFIG.curtain;
 const { skewAngle, shrinkScale, keyframeTimes } = CONFIG.curtain.physics;
 
@@ -64,15 +62,12 @@ const CurtainPanel = ({
 };
 
 // --- メインのカーテンアニメーションコンポーネント ---
-// 👈 Propsを正しく受け取る形に修正
 export const CurtainAnim = ({ leftCurtainStars, rightCurtainStars }: CurtainAnimProps) => {
-  // 👈 必要なContextを引っ張ってくる
   const { hasPlayedOpening, setHasPlayedOpening } = useAnimationContext();
   const shouldAnimate = !hasPlayedOpening;
   
   const [showCurtain, setShowCurtain] = useState(shouldAnimate);
 
-  // 👈 useEffectはreturnの「前」に書く
   useEffect(() => {
     if (hasPlayedOpening) {
       document.body.style.overflow = "auto";
@@ -88,7 +83,6 @@ export const CurtainAnim = ({ leftCurtainStars, rightCurtainStars }: CurtainAnim
     }
   }, [hasPlayedOpening, setHasPlayedOpening]);
 
-  // 👈 全体を Fragment（<> 〜 </>）で囲んで返す
   return (
     <>
       <AnimatePresence>
@@ -109,23 +103,6 @@ export const CurtainAnim = ({ leftCurtainStars, rightCurtainStars }: CurtainAnim
           </motion.div>
         )}
       </AnimatePresence>
-  
-      <style jsx global>{`
-        @keyframes twinkle {
-          0%,
-          100% {
-            opacity: 0.2;
-            transform: scale(0.8);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.2);
-          }
-        }
-        .animate-twinkle {
-          animation: twinkle 3s ease-in-out infinite alternate;
-        }
-      `}</style>
   
       <div
         className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"

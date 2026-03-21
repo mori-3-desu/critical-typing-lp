@@ -1,5 +1,3 @@
-"use client";
-
 import { CONFIG } from "@/app/utils/constants";
 import React from "react";
 

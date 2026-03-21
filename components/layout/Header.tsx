@@ -28,7 +28,6 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
                   <GamingKey
                     key={`c-${i}`}
                     char={char}
-                    hue="twilight"
                     index={i}
                   />
                 ))}
@@ -38,7 +37,6 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
                   <GamingKey
                     key={`t-${i}`}
                     char={char}
-                    hue="twilight"
                     index={i + 8}
                   />
                 ))}
@@ -63,7 +61,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
             <HeaderBtn
               href="/contact"
               text="お問い合わせ"
-              onClick={handlePlayClick}
+              onClick={() => setIsOpen(!isOpen)}
             />
           </nav>
 
@@ -71,7 +69,8 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="メニューを開く"
+              aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
+              aria-expanded={isOpen}
               className="p-2 rounded-lg text-[#fff9c4] hover:bg-white/10 transition-colors border border-white/20"
             >
               {isOpen ? (
@@ -119,7 +118,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
               onClick={handlePlayClick}
             />
             <HeaderBtn
-              href={`${BASE_GAME_URL}?muted=true`}
+              href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
               text="静かにプレイ"
               fullWidth
               onClick={handlePlayClick}
@@ -129,7 +128,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
               href="/faq"
               text="Q&A"
               fullWidth
-              onClick={handlePlayClick}
+              onClick={() => setIsOpen(!isOpen)}
             />
             <HeaderBtn
               href="/contact"
@@ -140,23 +139,6 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
           </div>
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes twinkle {
-          0%,
-          100% {
-            opacity: 0;
-            transform: scale(0.5);
-          }
-          50% {
-            opacity: 0.8;
-            transform: scale(1.2);
-          }
-        }
-        .animate-twinkle {
-          animation: twinkle 3s linear infinite alternate;
-        }
-      `}</style>
     </header>
   );
 }
@@ -166,7 +148,6 @@ const GamingKey = ({
   index,
 }: {
   char: string;
-  hue: string;
   index: number;
 }) => {
   const twilightStyles = [
