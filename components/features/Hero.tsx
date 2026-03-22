@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppAnimation } from "@/hooks/useAppAnimation";
 import { InfoCard } from "@/components/common/InfoCard";
 import News from "@/components/features/News";
+import { useAppAnimation } from "@/hooks/useAppAnimation";
 import { type CurtainStar } from "@/types";
 import { motion } from "framer-motion";
 import { MainBgStar } from "../common/MainBgStar";

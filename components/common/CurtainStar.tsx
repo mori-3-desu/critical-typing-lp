@@ -1,6 +1,6 @@
 "use client";
 
-import { CURTAIN_STAR_CONFIG } from "@/app/utils/constants";
+import { CURTAIN_STAR_CONFIG } from "@/utils/constants";
 import { type CurtainStar } from "@/types";
 import { memo, useEffect, useState } from "react";
 
