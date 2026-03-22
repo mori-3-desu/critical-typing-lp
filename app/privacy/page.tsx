@@ -1,5 +1,5 @@
 import { StarryBackground } from "@/components/common/StarBackground";
-import { generateStars } from "../utils/star";
+import { generateStars } from "@/utils/star";
 import { PrivacyHeader } from "./PrivacyHeader";
 import { PrivacyPolicy } from "./PrivacyPolicy";
 
