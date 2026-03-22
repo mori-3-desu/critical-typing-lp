@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { faqs } from "./FaqQA";
-import { AccordionItem } from "./FaqAccordion";
+import { AccordionItem } from "./Accordion";
 
 export const FaqInfo = () => {
   return (

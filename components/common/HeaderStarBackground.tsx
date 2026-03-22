@@ -1,10 +1,9 @@
-// src/components/common/HeaderStarBackground.tsx
 "use client";
 
 import { type HeaderStar } from "@/types";
 import { memo } from "react";
 
-// 🌟 Propsで完成品の星を受け取る
+// Propsで完成品の星を受け取る
 export const HeaderStarBackground = memo(
   ({ stars }: { stars: HeaderStar[] }) => {
     return (

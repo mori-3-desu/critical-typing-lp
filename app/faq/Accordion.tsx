@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FaqProps } from "../../types";
 
-// --- アコーディオン部品 ---
 export function AccordionItem({ question, answer }: FaqProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,7 +14,7 @@ export function AccordionItem({ question, answer }: FaqProps) {
       className="border border-white/40 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm shadow-sm transition-all hover:bg-white/20"
     >
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(prev => !prev)}
         className="flex items-center justify-between w-full p-5 text-left transition-colors cursor-pointer"
       >
         <div className="font-bold text-white text-base md:text-lg flex items-start gap-3 w-[90%]">
@@ -42,16 +41,25 @@ export function AccordionItem({ question, answer }: FaqProps) {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 1 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            key="content"
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            exit={{ scaleY: 0, opacity: 0 }}
+            style={{ originY: 0 }}
+            transition={{ duration: 0.4, ease: [0.04, 0.45, 0.73, 1] }}
+            className="overflow-hidden"
           >
-            <div className="p-5 text-white leading-relaxed font-medium flex items-start gap-3">
-              <span className="font-bold text-cyan-300 text-lg shrink-0 pt-[2px]">
-                A.
-              </span>
-              <span>{answer}</span>
-            </div>
+            <motion.div
+              initial={{ scaleY: 1.5 }}
+              animate={{ scaleY: 1 }}
+              style={{ originY: 0 }}
+              transition={{ duration: 0.4, ease: [0.04, 0.45, 0.73, 1] }}
+            >
+              <div className="p-5 text-white flex items-start gap-3">
+                <span className="font-bold text-cyan-300">A.</span>
+                <span>{answer}</span>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

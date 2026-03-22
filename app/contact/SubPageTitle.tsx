@@ -23,7 +23,7 @@ export const ContactTitle = ({ title }: ContactTitleProps) => {
         </Link>
       </div>
 
-      {/* 🌟 2. スマホ用 戻るボタン（Keymapと同じように右下に完全固定！） */}
+      {/* スマホ用 戻るボタン */}
       <Link
         href="/"
         className="xl:hidden fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-linear-to-r from-cyan-600 to-blue-600 border border-white/30 shadow-[0_4px_20px_rgba(6,182,212,0.6)] active:scale-95 transition-transform"

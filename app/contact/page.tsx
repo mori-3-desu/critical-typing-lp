@@ -1,5 +1,5 @@
 import { ContactForm } from "@/app/contact/Form";
-import { ContactTitle } from "@/app/contact/Title";
+import { ContactTitle } from "@/app/contact/SubPageTitle";
 import { StarryBackground } from "@/components/common/StarBackground";
 import { generateStars } from "@/utils/star";
 import { ContactNote } from "./Note";

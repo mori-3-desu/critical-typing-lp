@@ -1,7 +1,6 @@
 import { CONFIG } from "@/utils/constants";
 import React from "react";
 
-// InfoCardで使う色だけを定義 ）
 const CARD_COLORS = {
   primary: "linear-gradient(160deg, #4535b2 0%, #ae4868 100%)",
   news: "rgba(244, 156, 105, 0.85)",

@@ -124,27 +124,15 @@ export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
           0%,
           100% {
             transform: translateY(0) scale(1, 1);
-            box-shadow:
-              0 10px 0 #818cf8,
-              0 15px 20px rgba(0, 0, 0, 0.2);
           }
           30% {
             transform: translateY(-25px) scale(1.1, 0.9) rotateX(-10deg);
-            box-shadow:
-              0 35px 0 #818cf8,
-              0 40px 25px rgba(0, 0, 0, 0.15);
           }
           50% {
             transform: translateY(8px) scale(0.85, 1.15);
-            box-shadow:
-              0 0 0 #818cf8,
-              0 0 0 rgba(0, 0, 0, 0);
           }
           70% {
             transform: translateY(-5px) scale(1.05, 0.95);
-            box-shadow:
-              0 12px 0 #818cf8,
-              0 15px 15px rgba(0, 0, 0, 0.2);
           }
         }
 
