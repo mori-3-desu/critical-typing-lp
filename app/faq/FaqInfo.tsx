@@ -38,7 +38,7 @@ export const FaqInfo = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-cyan-900/60 to-blue-900/60 backdrop-blur-md rounded-2xl p-8 border border-cyan-400/30 text-center shadow-lg">
+        <div className="bg-linear-to-r from-cyan-900/60 to-blue-900/60 backdrop-blur-md rounded-2xl p-8 border border-cyan-400/30 text-center shadow-lg">
           <h3 className="text-lg font-bold mb-3 text-white">
             解決しない場合・バグ報告
           </h3>

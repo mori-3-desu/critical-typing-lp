@@ -176,7 +176,7 @@ export const KeySection = ({ scrollToSection }: Props) => {
 
       <Link
         href="/"
-        className="xl:hidden fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 border border-white/30 shadow-[0_4px_20px_rgba(79,70,229,0.6)] active:scale-95 transition-transform"
+        className="xl:hidden fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-linear-to-r from-indigo-600 to-purple-600 border border-white/30 shadow-[0_4px_20px_rgba(79,70,229,0.6)] active:scale-95 transition-transform"
       >
         <span className="text-2xl text-white">↩</span>
       </Link>
@@ -186,7 +186,7 @@ export const KeySection = ({ scrollToSection }: Props) => {
 
 const SectionBox = ({ title, children }: SectionBoxProps) => (
   <div className="bg-black/20 rounded-2xl p-4 md:p-6 border border-white/5 shadow-xl relative mt-3 md:mt-4 group">
-    <div className="absolute -top-3 left-4 bg-gradient-to-b from-indigo-600 to-indigo-800 px-5 py-2 rounded-lg border-t border-white/20 shadow-[0_4px_0_#312e81] flex items-center gap-2 cursor-pointer transition-all active:translate-y-1 active:shadow-none select-none">
+    <div className="absolute -top-3 left-4 bg-linear-to-b from-indigo-600 to-indigo-800 px-5 py-2 rounded-lg border-t border-white/20 shadow-[0_4px_0_#312e81] flex items-center gap-2 cursor-pointer transition-all active:translate-y-1 active:shadow-none select-none">
       <div className="w-2 h-2 rounded-full bg-amber-400 group-hover:animate-pulse" />
       <h3 className="text-sm md:text-base font-bold text-white tracking-wider uppercase drop-shadow-sm">
         {title}
@@ -197,7 +197,7 @@ const SectionBox = ({ title, children }: SectionBoxProps) => (
 );
 
 const TipBox = ({ title, children }: TipBoxProps) => (
-  <div className="bg-white/5 rounded-xl p-2 md:p-3 border border-white/5 flex flex-col items-center justify-center min-h-[90px]">
+  <div className="bg-white/5 rounded-xl p-2 md:p-3 border border-white/5 flex flex-col items-center justify-center min-h-22.5">
     <span className="text-xs text-indigo-300 font-bold mb-2 border-b border-white/10 pb-1 w-full text-center truncate px-1">
       {title}
     </span>
@@ -224,7 +224,7 @@ const KeyCap = ({
         className={`absolute inset-0 rounded-lg translate-y-[3px] md:translate-y-[5px] ${highlight ? "bg-amber-900" : "bg-slate-950"}`}
       />
       <div
-        className={`relative w-full rounded-lg border-t border-white/10 flex flex-col items-center justify-center transition-transform active:translate-y-[3px] md:active:translate-y-[5px] h-11 md:h-14 xl:h-auto xl:aspect-[1/0.8] ${highlight ? "bg-gradient-to-b from-amber-600 to-amber-700 shadow-[0_1px_0_rgba(255,255,255,0.2)_inset]" : "bg-gradient-to-b from-slate-700 to-slate-800 shadow-[0_1px_0_rgba(255,255,255,0.1)_inset] hover:from-slate-600 hover:to-slate-700"}`}
+        className={`relative w-full rounded-lg border-t border-white/10 flex flex-col items-center justify-center transition-transform active:translate-y-[3px] md:active:translate-y-[5px] h-11 md:h-14 xl:h-auto xl:aspect-[1/0.8] ${highlight ? "bg-linear-to-b from-amber-600 to-amber-700 shadow-[0_1px_0_rgba(255,255,255,0.2)_inset]" : "bg-linear-to-b from-slate-700 to-slate-800 shadow-[0_1px_0_rgba(255,255,255,0.1)_inset] hover:from-slate-600 hover:to-slate-700"}`}
       >
         <span className="text-[clamp(14px,1.5vw,24px)] font-bold text-white leading-none mb-0.5 md:mb-1 drop-shadow-md">
           {char}

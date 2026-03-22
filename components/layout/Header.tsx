@@ -160,7 +160,7 @@ const GamingKey = ({ char, index }: { char: string; index: number }) => {
   return (
     <div className="relative group transition-transform duration-75 active:scale-95">
       <div
-        className={`relative z-10 flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-b ${style.bg} rounded-lg md:rounded-xl border-t-[1px] md:border-t-2 border-l border-r border-b-[2px] md:border-b-4 ${style.border} border-b-black/30 shadow-[0_2px_0_rgba(0,0,0,0.3)] ${style.glow} transform transition-all group-hover:-translate-y-1 group-hover:brightness-110 group-active:translate-y-1 group-active:shadow-none group-active:border-b-0`}
+        className={`relative z-10 flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-linear-to-b ${style.bg} rounded-lg md:rounded-xl border-t-[1px] md:border-t-2 border-l border-r border-b-[2px] md:border-b-4 ${style.border} border-b-black/30 shadow-[0_2px_0_rgba(0,0,0,0.3)] ${style.glow} transform transition-all group-hover:-translate-y-1 group-hover:brightness-110 group-active:translate-y-1 group-active:shadow-none group-active:border-b-0`}
       >
         <div className="absolute inset-[3px] rounded-md bg-black/10 shadow-inner pointer-events-none"></div>
         <span
@@ -168,7 +168,7 @@ const GamingKey = ({ char, index }: { char: string; index: number }) => {
         >
           {char}
         </span>
-        <div className="absolute top-[2px] left-[2px] right-[2px] h-[35%] bg-gradient-to-b from-white/40 to-transparent rounded-t-md pointer-events-none"></div>
+        <div className="absolute top-[2px] left-[2px] right-[2px] h-[35%] bg-linear-to-b from-white/40 to-transparent rounded-t-md pointer-events-none"></div>
       </div>
     </div>
   );

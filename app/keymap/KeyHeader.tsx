@@ -4,7 +4,7 @@ export const KeyHeader = () => {
   return (
     <div className="w-full flex flex-col gap-3 mb-6">
       <div className="flex justify-between items-center bg-indigo-900/80 backdrop-blur-md py-3 px-5 rounded-xl border border-white/10 shadow-lg">
-        <h1 className="text-xl md:text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#fcd34d] to-[#fbbf24] whitespace-nowrap">
+        <h1 className="text-xl md:text-3xl font-bold tracking-wider text-transparent bg-clip-text bg-linear-to-r from-[#fcd34d] to-[#fbbf24] whitespace-nowrap">
           KEYMAP
         </h1>
         <Link

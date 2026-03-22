@@ -17,7 +17,7 @@ export default function NotesPage() {
     >
       <StarryBackground stars={initialStars} />
 
-      <main className="relative w-[95%] xl:w-[80%] max-w-[1000px] mx-auto py-10 flex flex-col items-center">
+      <main className="relative w-[95%] xl:w-[80%] max-w-250px mx-auto py-10 flex flex-col items-center">
         <NoteHeader />
         <NoteCaution />
       </main>
