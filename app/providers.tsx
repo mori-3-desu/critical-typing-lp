@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, ReactNode, useContext, useState } from "react";
-import { type AnimationContextType } from "./types";
+import { type AnimationContextType } from "../types";
 
 const AnimationContext = createContext<AnimationContextType | undefined>(
   undefined,

@@ -1,8 +1,8 @@
 "use client";
 import { StarryBackground } from "@/components/common/StarBackground";
-import { generateStars } from "../utils/star";
+import { generateStars } from "@/utils/star";
 import { KeyHeader } from "./KeyHeader";
-import { useSmoothScroll } from "../hooks/useScroll";
+import { useSmoothScroll } from "@/hooks/useScroll";
 import { KeySection } from "./KeySection";
 
 export default function KeymapPage() {

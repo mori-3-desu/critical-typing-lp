@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import { generateHeaderStars } from "./utils/star";
+import { generateHeaderStars } from "@/utils/star";
 import Footer from "@/components/features/Footer";
 import { AnimationProvider } from "./providers";
 
@@ -18,17 +18,21 @@ const mPlusRounded = M_PLUS_Rounded_1c({
   variable: "--font-rounded",
 });
 
-// SEO設定: サイトの基本URL
-const SITE_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
+// サイトの基本URL
+// サイトのURLが設定されていなかったら早めに例外を投げる
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+if (!SITE_URL) {
+  throw new Error("NEXT_PUBLIC_SITE_URL is not set")
+}
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL) || "",
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "CRITICAL TYPING",
     template: "%s | CRITICAL TYPING",
   },
   description:
-    "ミスったら自分で修正！BackSpace対応の新しい無料ブラウザタイピングゲーム！ポップな世界観で、初心者からガチ勢まで全国ランキングで競い合おう！登録なしですぐ遊べます。",
+    "ミスったら自分で修正!BackSpace対応の新しい無料ブラウザタイピングゲーム!ポップな世界観で、初心者からガチ勢まで全国ランキングで競い合おう！登録なしですぐ遊べます。",
 
   keywords: [
     "タイピング",
@@ -49,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CRITICAL TYPING | 打ち心地が気持ちいい無料タイピング",
     description:
-      "ミスったらBackSpaceで修正！全国ランキング搭載の無料ブラウザタイピングゲーム！楽しくタイピング練習して目指せ上位ランカー！",
+      "ミスったらBackSpaceで修正!全国ランキング搭載の無料ブラウザタイピングゲーム!楽しくタイピング練習して目指せ上位ランカー！",
     url: SITE_URL,
     siteName: "CRITICAL TYPING",
     locale: "ja_JP",
@@ -69,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CRITICAL TYPING",
     description:
-      "ミスったらBackSpaceで修正！正確さを極めるポップな無料タイピングゲーム。",
+      "ミスったらBackSpaceで修正!正確さを極めるポップな無料タイピングゲーム。",
     images: ["/title.jpg"],
   },
 };
@@ -85,7 +89,7 @@ export default function RootLayout({
     <html lang="ja">
       {/* 外枠（白い額縁） */}
       <body
-        className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white p-[5px] h-screen overflow-hidden box-border`}
+        className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white p-1.25 h-screen overflow-hidden box-border`}
       >
         <div className="relative w-full h-full rounded-[20px] overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
           <Header stars={headerStars} />

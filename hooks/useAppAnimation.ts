@@ -1,4 +1,4 @@
-import { useAnimationContext } from "../providers";
+import { useAnimationContext } from "../app/providers";
 import { TargetAndTransition } from "framer-motion";
 
 export const useAppAnimation = () => {

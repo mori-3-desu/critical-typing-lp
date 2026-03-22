@@ -1,14 +1,14 @@
 "use client";
 
+import { useAppAnimation } from "@/hooks/useAppAnimation";
 import { InfoCard } from "@/components/common/InfoCard";
 import News from "@/components/features/News";
+import { type CurtainStar } from "@/types";
+import { motion } from "framer-motion";
+import { MainBgStar } from "../common/MainBgStar";
 import { CurtainAnim } from "./CurtainAnim";
-import { motion, Target } from "framer-motion";
-import { StarryBackground } from "../common/MainBgStar";
-import { type CurtainStar } from "@/app/types";
-import { PlayGuide } from "./PlayGuide";
 import { GuideButtonNote } from "./GuideButtonNote";
-import { useAppAnimation } from "@/app/hooks/useAppAnimation";
+import { PlayGuide } from "./PlayGuide";
 
 type HeroProps = {
   leftCurtainStars: CurtainStar[];
@@ -16,13 +16,19 @@ type HeroProps = {
 };
 
 // --- 3. メインコンポーネント ---
-export default function Hero({ leftCurtainStars, rightCurtainStars}: HeroProps){
-    const {commonTransition, initialStyle} = useAppAnimation();
+export default function Hero({
+  leftCurtainStars,
+  rightCurtainStars,
+}: HeroProps) {
+  const { commonTransition, initialStyle } = useAppAnimation();
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-indigo-700 via-purple-500 to-amber-400 font-[family-name:var(--font-rounded)] px-4 lg:px-[2vw] pt-8 lg:pt-[3vh] pb-10 lg:pb-[4vh]">
-      <CurtainAnim leftCurtainStars={leftCurtainStars} rightCurtainStars={rightCurtainStars} />
-      <StarryBackground />
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-linear-to-b from-indigo-700 via-purple-500 to-amber-400 --font-rounded px-4 lg:px-[2vw] pt-8 lg:pt-[3vh] pb-10 lg:pb-[4vh]">
+      <CurtainAnim
+        leftCurtainStars={leftCurtainStars}
+        rightCurtainStars={rightCurtainStars}
+      />
+      <MainBgStar />
 
       <div className="z-10 w-full lg:w-[95vw] flex flex-col items-center text-center mx-auto max-w-7xl">
         {/* メインカード */}

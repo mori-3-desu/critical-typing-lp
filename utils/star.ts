@@ -1,5 +1,5 @@
-import { type Star, type CurtainStar, type HeaderStar } from "@/app/types";
-import { STAR_CONFIG, CURTAIN_STAR_CONFIG } from "@/app/utils/constants";
+import { CURTAIN_STAR_CONFIG, STAR_CONFIG } from "@/utils/constants";
+import { type CurtainStar, type HeaderStar, type Star } from "@/types";
 
 const {
   COUNT,

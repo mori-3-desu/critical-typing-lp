@@ -1,8 +1,8 @@
 "use client";
+import { HeaderStarBackground } from "@/components/common/HeaderStarBackground";
+import { type HeaderStar } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
-import { type HeaderStar } from "@/app/types";
-import { HeaderStarBackground } from "@/components/common/HeaderStarBackground";
 
 export default function Header({ stars }: { stars: HeaderStar[] }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
   };
 
   return (
-    <header className="relative w-full z-50 font-[family-name:var(--font-rounded)] transition-all duration-300 bg-gradient-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-b-[4px] border-[#99FF99]/40 shadow-[0_4px_20px_rgba(148,163,184,0.2)] overflow-hidden">
+    <header className="relative w-full z-50 font-rounded transition-all duration-300 bg-linear-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-b-[4px] border-[#99FF99]/40 shadow-[0_4px_20px_rgba(148,163,184,0.2)] overflow-hidden">
       <HeaderStarBackground stars={stars} />
       <div className="w-full px-4 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-20 md:h-28">
@@ -25,20 +25,12 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
             <Link href="/" className="flex flex-col items-center gap-1">
               <div className="flex gap-[3px] p-1">
                 {"CRITICAL".split("").map((char, i) => (
-                  <GamingKey
-                    key={`c-${i}`}
-                    char={char}
-                    index={i}
-                  />
+                  <GamingKey key={`c-${i}`} char={char} index={i} />
                 ))}
               </div>
               <div className="flex gap-[3px] p-1">
                 {"TYPING".split("").map((char, i) => (
-                  <GamingKey
-                    key={`t-${i}`}
-                    char={char}
-                    index={i + 8}
-                  />
+                  <GamingKey key={`t-${i}`} char={char} index={i + 8} />
                 ))}
               </div>
             </Link>
@@ -49,15 +41,15 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
             <HeaderBtn
               href={BASE_GAME_URL ? BASE_GAME_URL : "#"}
               text="今すぐプレイ"
-              onClick={handlePlayClick}
+              onClick={(handlePlayClick)}
             />
             <HeaderBtn
               href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
               text="静かにプレイ"
-              onClick={handlePlayClick}
+              onClick={(handlePlayClick)}
             />
             {/* リンク先をページに変更 */}
-            <HeaderBtn href="/faq" text="Q&A" onClick={handlePlayClick} />
+            <HeaderBtn href="/faq" text="Q&A" onClick={() => setIsOpen(!isOpen)} />
             <HeaderBtn
               href="/contact"
               text="お問い合わせ"
@@ -115,13 +107,13 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
               href={BASE_GAME_URL ? BASE_GAME_URL : "#"}
               text="今すぐプレイ"
               fullWidth
-              onClick={handlePlayClick}
+              onClick={(handlePlayClick)}
             />
             <HeaderBtn
               href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
               text="静かにプレイ"
               fullWidth
-              onClick={handlePlayClick}
+              onClick={(handlePlayClick)}
             />
             {/* リンク先をページに変更 */}
             <HeaderBtn
@@ -134,7 +126,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
               href="/contact"
               text="お問い合わせ"
               fullWidth
-              onClick={handlePlayClick}
+              onClick={() => setIsOpen(!isOpen)}
             />
           </div>
         </div>
@@ -143,13 +135,7 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
   );
 }
 
-const GamingKey = ({
-  char,
-  index,
-}: {
-  char: string;
-  index: number;
-}) => {
+const GamingKey = ({ char, index }: { char: string; index: number }) => {
   const twilightStyles = [
     {
       bg: "from-indigo-600 to-purple-800",

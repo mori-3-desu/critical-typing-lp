@@ -1,7 +1,7 @@
 "use client";
 
-import { type CurtainStar } from "@/app/types";
-import { CURTAIN_STAR_CONFIG } from "@/app/utils/constants";
+import { CURTAIN_STAR_CONFIG } from "@/utils/constants";
+import { type CurtainStar } from "@/types";
 import { memo } from "react";
 
 const { TRANS_OPACITY } = CURTAIN_STAR_CONFIG;

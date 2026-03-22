@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const SubPageFooter = () => {
+export const ContactNote = () => {
   return (
     <div className="mt-8 text-center text-xs text-gray-400">
       ※ 送信内容はGoogleフォームを経由して管理者に届きます。

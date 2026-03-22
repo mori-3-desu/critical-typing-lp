@@ -1,4 +1,4 @@
-import { CONFIG } from "@/app/utils/constants";
+import { CONFIG } from "@/utils/constants";
 import React from "react";
 
 // InfoCardで使う色だけを定義 ）

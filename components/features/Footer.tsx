@@ -3,24 +3,18 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="relative w-full z-10 font-[family-name:var(--font-rounded)] bg-gradient-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-t-[3px] border-[#94a3b8]/40 shadow-[0_-4px_20px_rgba(148,163,184,0.2)] overflow-hidden text-white py-10 px-6 md:px-12">
-      {/* md:flex-row を xl:flex-row に変更。
-          これにより、タブレットや一般的なノートPC（~1280px未満）までは
-          「縦並び（センター揃え）」が維持され、崩れを防ぎます。 */}
+      {/* Footer設定 */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-center gap-8">
         {/* 左側: ロゴと説明 */}
-        {/* xl未満はセンター揃え、xl以上で左寄せ */}
         <div className="flex flex-col gap-2 text-center xl:text-left">
           <h2 className="text-2xl font-[900] tracking-wider drop-shadow-md">
-            <span className="bg-gradient-to-r from-[#fff9c4] via-[#fcd34d] to-[#fff9c4] bg-clip-text text-transparent bg-[length:200%_auto] animate-shine">
+            <span className="bg-gradient-to-r from-[#fff9c4] via-[#fcd34d] to-[#fff9c4] bg-clip-text text-transparent bg-[length:200%_auto]">
               CRITICAL TYPING
             </span>
           </h2>
         </div>
 
         {/* 右側: リンクメニュー */}
-        {/* ここも xl:flex-row に変更。
-            これにより、幅が十分にある大画面（xl以上）以外は、
-            画像のように「縦にリスト表示」され、文字が見やすくなります。 */}
         <div className="flex flex-col xl:flex-row items-center gap-5 xl:gap-8">
           <Link
             href="/faq"

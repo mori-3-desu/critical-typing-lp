@@ -1,11 +1,11 @@
 "use client";
 
-import { CONFIG, CURTAIN_GRADIENT, PALETTE } from "@/app/utils/constants";
+import { useAnimationContext } from "@/app/providers";
+import { CONFIG, CURTAIN_GRADIENT, PALETTE } from "@/utils/constants";
+import { type CurtainStar } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CurtainDecorations } from "../common/CurtainDecorations";
-import { type CurtainStar } from "@/app/types";
-import { useAnimationContext } from "@/app/providers"; 
 
 type CurtainAnimProps = {
   leftCurtainStars: CurtainStar[];
@@ -62,10 +62,13 @@ const CurtainPanel = ({
 };
 
 // --- メインのカーテンアニメーションコンポーネント ---
-export const CurtainAnim = ({ leftCurtainStars, rightCurtainStars }: CurtainAnimProps) => {
+export const CurtainAnim = ({
+  leftCurtainStars,
+  rightCurtainStars,
+}: CurtainAnimProps) => {
   const { hasPlayedOpening, setHasPlayedOpening } = useAnimationContext();
   const shouldAnimate = !hasPlayedOpening;
-  
+
   const [showCurtain, setShowCurtain] = useState(shouldAnimate);
 
   useEffect(() => {
@@ -78,7 +81,7 @@ export const CurtainAnim = ({ leftCurtainStars, rightCurtainStars }: CurtainAnim
         setHasPlayedOpening(true);
         document.body.style.overflow = "auto";
       }, openDelay);
-  
+
       return () => clearTimeout(timer);
     }
   }, [hasPlayedOpening, setHasPlayedOpening]);
@@ -103,7 +106,7 @@ export const CurtainAnim = ({ leftCurtainStars, rightCurtainStars }: CurtainAnim
           </motion.div>
         )}
       </AnimatePresence>
-  
+
       <div
         className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"
         style={{

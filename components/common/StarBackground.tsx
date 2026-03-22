@@ -1,6 +1,6 @@
 "use client";
 
-import { type Star } from "@/app/types";
+import { type Star } from "@/types";
 import { memo } from "react";
 
 // 親から受け取る「完成品の星データ」の型

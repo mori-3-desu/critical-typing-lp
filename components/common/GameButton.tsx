@@ -1,6 +1,6 @@
+import { CONFIG } from "@/utils/constants";
+import { GameButtonProps } from "@/types";
 import Link from "next/link";
-import { GameButtonProps } from "@/app/types";
-import { CONFIG } from "@/app/utils/constants";
 
 export const GameButton = ({
   href,

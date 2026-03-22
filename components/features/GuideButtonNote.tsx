@@ -1,8 +1,12 @@
-import { PALETTE } from "@/app/utils/constants";
+import { PALETTE } from "@/utils/constants";
 import { GameButton } from "../common/GameButton";
 import { motion } from "framer-motion";
-import { useAppAnimation } from "@/app/hooks/useAppAnimation";
+import { useAppAnimation } from "@/hooks/useAppAnimation";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+if (!SITE_URL) {
+  throw new Error("NEXT_PUBLIC_SITE_URL is not set")
+}
 const BASE_GAME_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
 
 export const GuideButtonNote = () => {

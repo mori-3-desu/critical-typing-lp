@@ -1,7 +1,7 @@
 "use client";
 
-import { type BgStar } from "@/app/types";
-import { BG_STAR_CONFIG } from "@/app/utils/constants";
+import { BG_STAR_CONFIG } from "@/utils/constants";
+import { type BgStar } from "@/types";
 import { memo, useEffect, useState } from "react";
 
 const { MOBILE_BREAKPOINT, COUNT, GRID, OFFSET, SIZE, ANIM } = BG_STAR_CONFIG;
@@ -56,7 +56,7 @@ const useBgStars = () => {
 };
 
 // 🌟 背景星コンポーネント本体
-export const StarryBackground = memo(() => {
+export const MainBgStar = memo(() => {
   const stars = useBgStars(); // マシンから受け取るだけ！
 
   return (
@@ -80,4 +80,4 @@ export const StarryBackground = memo(() => {
   );
 });
 
-StarryBackground.displayName = "StarryBackground";
+MainBgStar.displayName = "MainBgStar";

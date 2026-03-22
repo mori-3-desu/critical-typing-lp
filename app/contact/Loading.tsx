@@ -1,27 +1,35 @@
-export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
-    
-  return (
-    <div id="loading-screen" className={fadeOut ? "fade-out" : ""}>
-      <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+"use client";
+import { Fredoka } from "next/font/google";
 
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: "--font-fredoka",
+  display: "swap",
+});
+
+export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
+  return (
+    <div
+      className={`loading-screen ${fadeOut ? "fade-out" : ""} ${fredoka.variable}`}
+    >
+      {/* Tailwindで再現するのが困難だと感じたため、jsxにしました。 */}
+      <style jsx>{`
         /* =========================================
-           ★ローディング画面（明るめブルーVer）
+           ★ローディング画面
            ========================================= */
-        #loading-screen {
+        .loading-screen {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
 
-          /* ★修正: 暗すぎない、爽やかな青〜紫のグラデーション */
           background: linear-gradient(
             to bottom,
             #4338ca 0%,
-            /* インディゴ */ #6366f1 40%,
-            /* 明るい紫青 */ #60a5fa 70%,
-            /* 明るい青 */ #a5f3fc 100% /* 爽やかな水色 */
+            #6366f1 40%,
+            #60a5fa 70%,
+            #a5f3fc 100%
           );
           z-index: 50;
 
@@ -38,7 +46,7 @@ export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
           pointer-events: all;
         }
 
-        #loading-screen.fade-out {
+        .loading-screen.fade-out {
           opacity: 0;
           visibility: hidden;
           pointer-events: none;
@@ -64,19 +72,18 @@ export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
           width: 60px;
           height: 60px;
 
-          /* ★修正: 背景が明るくなったので、キーは「白」を基調に見やすく */
           background: 
-              /* 左耳 */
+              /* 左耳, 右耳, 本体 */
             linear-gradient(135deg, transparent 50%, #ffffff 50%)
               no-repeat -10px -15px / 40px 40px,
-            /* 右耳 */ linear-gradient(225deg, transparent 50%, #ffffff 50%)
-              no-repeat 30px -15px / 40px 40px,
-            /* 本体 */ linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            linear-gradient(225deg, transparent 50%, #ffffff 50%) no-repeat
+              30px -15px / 40px 40px,
+            linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
 
           border-radius: 16px;
-          font-family: "Fredoka One", cursive, sans-serif;
+          font-family: var(--font-fredoka);
           font-size: 32px;
-          color: #4f46e5; /* 文字色はクッキリしたインディゴ */
+          color: #4f46e5;
           text-shadow: 1px 1px 0 rgba(199, 210, 254, 0.5);
 
           display: flex;
@@ -109,26 +116,8 @@ export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
           pointer-events: none;
         }
 
-        .key.cat:nth-child(1) {
-          animation-delay: 0s;
-        }
-        .key.cat:nth-child(2) {
-          animation-delay: 0.1s;
-        }
-        .key.cat:nth-child(3) {
-          animation-delay: 0.2s;
-        }
-        .key.cat:nth-child(4) {
-          animation-delay: 0.3s;
-        }
-        .key.cat:nth-child(5) {
-          animation-delay: 0.4s;
-        }
-        .key.cat:nth-child(6) {
-          animation-delay: 0.5s;
-        }
-        .key.cat:nth-child(7) {
-          animation-delay: 0.6s;
+        .key.cat {
+          animation-delay: calc(var(--i) * 0.1s);
         }
 
         @keyframes catBounce {
@@ -150,30 +139,18 @@ export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
             box-shadow:
               0 0 0 #818cf8,
               0 0 0 rgba(0, 0, 0, 0);
-            background:
-              linear-gradient(135deg, transparent 50%, #818cf8 50%)
-                no-repeat -10px -5px / 40px 40px,
-              linear-gradient(225deg, transparent 50%, #818cf8 50%) no-repeat
-                30px -5px / 40px 40px,
-              linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
           }
           70% {
             transform: translateY(-5px) scale(1.05, 0.95);
             box-shadow:
               0 12px 0 #818cf8,
               0 15px 15px rgba(0, 0, 0, 0.2);
-            background:
-              linear-gradient(135deg, transparent 50%, #ffffff 50%)
-                no-repeat -10px -15px / 40px 40px,
-              linear-gradient(225deg, transparent 50%, #ffffff 50%) no-repeat
-                30px -15px / 40px 40px,
-              linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
           }
         }
 
         .loading-text {
           margin-top: 60px;
-          font-family: "Fredoka One", cursive, sans-serif;
+          font-family: var(--font-fredoka);
           color: #fff;
           font-size: 32px;
           letter-spacing: 0.1em;
@@ -200,13 +177,15 @@ export const CatLoader = ({ fadeOut }: { fadeOut: boolean }) => {
       `}</style>
 
       <div className="keyboard-loader">
-        <div className="key cat">L</div>
-        <div className="key cat">O</div>
-        <div className="key cat">A</div>
-        <div className="key cat">D</div>
-        <div className="key cat">I</div>
-        <div className="key cat">N</div>
-        <div className="key cat">G</div>
+        {["L", "O", "A", "D", "I", "N", "G"].map((char, index) => (
+          <div
+            key={index}
+            className="key cat"
+            style={{ "--i": index } as React.CSSProperties}
+          >
+            {char}
+          </div>
+        ))}
       </div>
       <div className="loading-text">
         NOW LOADING <span className="paw">🐾</span>

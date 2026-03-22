@@ -1,4 +1,4 @@
-import { PALETTE } from "@/app/utils/constants";
+import { PALETTE } from "@/utils/constants";
 
 const Highlight = ({
   children,

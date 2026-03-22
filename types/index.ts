@@ -14,10 +14,6 @@ export type AnimationContextType = {
   setHasPlayedOpening: (value: boolean) => void;
 };
 
-export type SubPageHeaderProps = {
-  title: string;
-};
-
 export type FaqProps = {
   question: string;
   answer: string;

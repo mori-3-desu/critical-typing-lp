@@ -5,6 +5,7 @@
    ========================================== */
 @theme {
   --font-rounded: var(--font-rounded);
+  --font-fredoka: var(--font-fredoka);
 
   /* blobアニメーションの登録 */
   --animate-blob: blob 7s infinite;

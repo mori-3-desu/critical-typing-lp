@@ -1,6 +1,7 @@
+"use client";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaqProps } from "../types";
+import { FaqProps } from "../../types";
 
 // --- アコーディオン部品 ---
 export function AccordionItem({ question, answer }: FaqProps) {
@@ -9,7 +10,7 @@ export function AccordionItem({ question, answer }: FaqProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       className="border border-white/40 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm shadow-sm transition-all hover:bg-white/20"
     >

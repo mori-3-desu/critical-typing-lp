@@ -1,4 +1,4 @@
-import { generateStars } from "../utils/star";
+import { generateStars } from "@/utils/star";
 import { StarryBackground } from "@/components/common/StarBackground";
 import { FaqInfo } from "./FaqInfo";
 import { FaqHeader } from "./FaqHeader";
@@ -7,7 +7,7 @@ export default function FAQPage() {
   const initialStars = generateStars();
   return (
     <div
-      className="fixed inset-0 w-full h-[100dvh] text-white font-[family-name:var(--font-rounded)] overflow-y-auto z-[9999] theme-blue"
+      className="fixed inset-0 w-full h-[100dvh] text-white --font-rounded overflow-y-auto z-[9999] theme-blue"
       style={{
         background: "linear-gradient(to bottom, #143C5A, #86B6E0)",
       }}
