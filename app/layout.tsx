@@ -3,9 +3,9 @@ import { Inter, M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { generateHeaderStars } from "@/utils/star";
-import Footer from "@/components/features/Footer";
 import { AnimationProvider } from "./providers";
 import { env } from "@/env";
+import dynamic from "next/dynamic";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,10 +14,12 @@ const inter = Inter({
 });
 const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["400", "700", "800"],
-  display: "block",
+  display: "swap",
   preload: false,
   variable: "--font-rounded",
 });
+
+const Footer = dynamic(() => import("@/components/features/Footer"));
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.SITE_URL),

@@ -9,6 +9,14 @@
 
   /* blobアニメーションの登録 */
   --animate-blob: blob 7s infinite;
+
+  /* カードスライドインアニメーション */
+  --animate-slide-up: slide-up 0.8s 0.8s ease both;
+  @keyframes slide-up {
+    from { transform: translateY(20px); }
+    to { transform: translateY(0); }
+  }
+
   @keyframes blob {
     0%,
     100% {
