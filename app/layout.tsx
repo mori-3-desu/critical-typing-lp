@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import { generateHeaderStars } from "@/utils/star";
 import Footer from "@/components/features/Footer";
 import { AnimationProvider } from "./providers";
+import { env } from "@/env";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,15 +19,8 @@ const mPlusRounded = M_PLUS_Rounded_1c({
   variable: "--font-rounded",
 });
 
-// サイトの基本URL
-// サイトのURLが設定されていなかったら早めに例外を投げる
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
-if (!SITE_URL) {
-  throw new Error("NEXT_PUBLIC_SITE_URL is not set")
-}
-
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(env.SITE_URL),
   title: {
     default: "CRITICAL TYPING",
     template: "%s | CRITICAL TYPING",
@@ -54,7 +48,7 @@ export const metadata: Metadata = {
     title: "CRITICAL TYPING | 打ち心地が気持ちいい無料タイピング",
     description:
       "ミスったらBackSpaceで修正!全国ランキング搭載の無料ブラウザタイピングゲーム!楽しくタイピング練習して目指せ上位ランカー！",
-    url: SITE_URL,
+    url: env.SITE_URL,
     siteName: "CRITICAL TYPING",
     locale: "ja_JP",
     type: "website",

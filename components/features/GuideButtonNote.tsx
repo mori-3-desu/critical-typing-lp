@@ -2,12 +2,7 @@ import { PALETTE } from "@/utils/constants";
 import { GameButton } from "../common/GameButton";
 import { motion } from "framer-motion";
 import { useAppAnimation } from "@/hooks/useAppAnimation";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
-if (!SITE_URL) {
-  throw new Error("NEXT_PUBLIC_SITE_URL is not set")
-}
-const BASE_GAME_URL = process.env.NEXT_PUBLIC_GAME_URL || "";
+import { env } from "@/env";
 
 export const GuideButtonNote = () => {
   const { commonTransition, initialStyle } = useAppAnimation();
@@ -35,7 +30,7 @@ export const GuideButtonNote = () => {
         className="flex flex-col items-center gap-4 lg:gap-[1.5vw] w-full mb-10 lg:mb-[3vw]"
       >
         <GameButton
-          href={BASE_GAME_URL}
+          href={env.GAME_URL}
           size="large"
           label="CRITICAL TYPINGを始める"
         />
@@ -49,7 +44,7 @@ export const GuideButtonNote = () => {
           />
 
           <GameButton
-            href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
+            href={env.GAME_URL}
             variant="secondary"
             size="medium"
             label="静かに始める (ミュート)"

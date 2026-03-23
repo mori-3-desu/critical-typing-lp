@@ -3,16 +3,13 @@ import { HeaderStarBackground } from "@/components/common/HeaderStarBackground";
 import { type HeaderStar } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
+import { env } from "@/env";
 
 export default function Header({ stars }: { stars: HeaderStar[] }) {
   const [isOpen, setIsOpen] = useState(false);
-  const BASE_GAME_URL: string = process.env.NEXT_PUBLIC_GAME_URL ?? "";
 
   const handlePlayClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!BASE_GAME_URL) {
-      e.preventDefault();
-      alert("現在準備中です、しばらくお待ちください");
-    }
+    e.preventDefault();
   };
 
   // setIsOpen(!isOpen)だと古いクロージャのisOpen参照するので
@@ -43,28 +40,32 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
           {/* PCメニュー (lg以上) */}
           <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
             <HeaderBtn
-              href={BASE_GAME_URL ? BASE_GAME_URL : "#"}
+              href={env.GAME_URL}
               text="今すぐプレイ"
-              onClick={(handlePlayClick)}
+              onClick={handlePlayClick}
             />
             <HeaderBtn
-              href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
+              href={`${env.GAME_URL}?muted=true`}
               text="静かにプレイ"
-              onClick={(handlePlayClick)}
+              onClick={handlePlayClick}
             />
             {/* リンク先をページに変更 */}
-            <HeaderBtn href="/faq" text="Q&A" onClick={() => setIsOpen(prev => !prev)} />
+            <HeaderBtn
+              href="/faq"
+              text="Q&A"
+              onClick={() => setIsOpen((prev) => !prev)}
+            />
             <HeaderBtn
               href="/contact"
               text="お問い合わせ"
-              onClick={() => setIsOpen(prev => !prev)}
+              onClick={() => setIsOpen((prev) => !prev)}
             />
           </nav>
 
           {/* ハンバーガーボタン (lg未満) */}
           <div className="lg:hidden flex items-center">
             <button
-              onClick={() => setIsOpen(prev => !prev)}
+              onClick={() => setIsOpen((prev) => !prev)}
               aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
               aria-expanded={isOpen}
               className="p-2 rounded-lg text-[#fff9c4] hover:bg-white/10 transition-colors border border-white/20"
@@ -108,29 +109,29 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
         <div className="lg:hidden border-t-2 border-[#94a3b8]/30 bg-[#0f2027]/95 backdrop-blur-xl shadow-2xl">
           <div className="px-6 py-6 space-y-4 flex flex-col items-center">
             <HeaderBtn
-              href={BASE_GAME_URL ? BASE_GAME_URL : "#"}
+              href={env.GAME_URL}
               text="今すぐプレイ"
               fullWidth
-              onClick={(handlePlayClick)}
+              onClick={handlePlayClick}
             />
             <HeaderBtn
-              href={BASE_GAME_URL ? `${BASE_GAME_URL}?muted=true` : "#"}
+              href={`${env.GAME_URL}?muted=true`}
               text="静かにプレイ"
               fullWidth
-              onClick={(handlePlayClick)}
+              onClick={handlePlayClick}
             />
             {/* リンク先をページに変更 */}
             <HeaderBtn
               href="/faq"
               text="Q&A"
               fullWidth
-              onClick={() => setIsOpen(prev => !prev)}
+              onClick={() => setIsOpen((prev) => !prev)}
             />
             <HeaderBtn
               href="/contact"
               text="お問い合わせ"
               fullWidth
-              onClick={() => setIsOpen(prev => !prev)}
+              onClick={() => setIsOpen((prev) => !prev)}
             />
           </div>
         </div>
