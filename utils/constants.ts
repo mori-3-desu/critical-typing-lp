@@ -86,7 +86,7 @@ export const CURTAIN_STAR_CONFIG = {
 // 通常の背景の星空
 export const BG_STAR_CONFIG = {
   MOBILE_BREAKPOINT: 768,
-  COUNT: { MOBILE: 100, PC: 400 },
+  COUNT: { MOBILE: 50, PC: 150 },
   GRID: { MOBILE: 10, PC: 20 },
   OFFSET: { BASE: 10, VAR: 80 },
   SIZE: {

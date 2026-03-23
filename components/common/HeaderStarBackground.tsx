@@ -19,7 +19,6 @@ export const HeaderStarBackground = memo(
               height: s.height,
               animationDelay: s.delay,
               animationDuration: s.dur,
-              boxShadow: s.bshadow,
             }}
           />
         ))}

@@ -72,7 +72,6 @@ export const MainBgStar = memo(() => {
             height: s.size,
             animationDelay: s.delay,
             animationDuration: s.dur,
-            boxShadow: "0 0 3px 1px rgba(255, 255, 204, 0.8)",
           }}
         />
       ))}

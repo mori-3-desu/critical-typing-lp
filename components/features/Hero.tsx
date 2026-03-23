@@ -23,7 +23,7 @@ export default function Hero({
   const { commonTransition, initialStyle } = useAppAnimation();
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-linear-to-b from-indigo-700 via-purple-500 to-amber-400 --font-rounded px-4 lg:px-[2vw] pt-8 lg:pt-[3vh] pb-10 lg:pb-[4vh]">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-linear-to-b from-indigo-700 via-purple-500 to-amber-400 font-rounded px-4 lg:px-[2vw] pt-8 lg:pt-[3vh] pb-10 lg:pb-[4vh]">
       <CurtainAnim
         leftCurtainStars={leftCurtainStars}
         rightCurtainStars={rightCurtainStars}

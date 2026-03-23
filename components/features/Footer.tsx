@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative w-full z-10 font-[family-name:var(--font-rounded)] bg-linear-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-t-[3px] border-[#94a3b8]/40 shadow-[0_-4px_20px_rgba(148,163,184,0.2)] overflow-hidden text-white py-10 px-6 md:px-12">
+    <footer className="relative w-full z-10 font-rounded bg-linear-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-t-[3px] border-[#94a3b8]/40 shadow-[0_-4px_20px_rgba(148,163,184,0.2)] overflow-hidden text-white py-10 md:px-12">
       {/* Footer設定 */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-center gap-8">
         {/* 左側: ロゴと説明 */}
