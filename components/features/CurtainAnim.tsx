@@ -92,7 +92,7 @@ export const CurtainAnim = ({
         {showCurtain && (
           <motion.div
             key="curtain-wrapper"
-            className="fixed inset-0 z-[9999] flex pointer-events-none"
+            className="fixed inset-0 z-9999 flex pointer-events-none"
             exit={{
               opacity: 0,
               transition: {

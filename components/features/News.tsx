@@ -10,16 +10,22 @@ type NewsItem = {
 
 const NEWS_ITEMS: NewsItem[] = [
   {
-    id: 1,
+    id: 3,
+    date: "2026.03.17",
+    tag: "feat",
+    text: "新難易度【EXTRA】を追加しました!"
+  },
+  {
+    id: 2,
     date: "2026.02.03",
     tag: "fix",
     text: "特定条件でタイマー演出が二重に出てしまう不具合を修正しました。",
   },
   {
-    id: 2,
+    id: 1,
     date: "2026.01.27",
     tag: "Release",
-    text: "サイトを公開しました！ CRITICAL TYPING リリース！",
+    text: "サイトを公開しました! CRITICAL TYPING リリース!",
   },
 ];
 

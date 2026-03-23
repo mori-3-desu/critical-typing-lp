@@ -9,6 +9,8 @@ export type Star = {
   delay: string;
 };
 
+// 今回は初期画面時のみの仕様のためこの型を採用している
+// 他にアニメーションを使いたい場合はDispatch<SetStateAction<boolean>>を検討する
 export type AnimationContextType = {
   hasPlayedOpening: boolean;
   setHasPlayedOpening: (value: boolean) => void;

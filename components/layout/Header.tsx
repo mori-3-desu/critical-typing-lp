@@ -9,26 +9,30 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
   const BASE_GAME_URL: string = process.env.NEXT_PUBLIC_GAME_URL ?? "";
 
   const handlePlayClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // 空文字の場合はエラーハンドリングを実施
     if (!BASE_GAME_URL) {
       e.preventDefault();
       alert("現在準備中です、しばらくお待ちください");
     }
   };
 
+  // setIsOpen(!isOpen)だと古いクロージャのisOpen参照するので
+  // 他の処理で値が変わっても!falseがtrueになってしまい
+  // 他の更新をなかったことにしてしまいバグる可能性がある
+  // prev => !prev を使うと、Reactが最新のstateをprevに渡してくれるので
+  // 値が先祖返りするバグを防ぐ
   return (
-    <header className="relative w-full z-50 font-rounded transition-all duration-300 bg-linear-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-b-[4px] border-[#99FF99]/40 shadow-[0_4px_20px_rgba(148,163,184,0.2)] overflow-hidden">
+    <header className="relative w-full z-50 font-rounded transition-all duration-300 bg-linear-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-b-4 border-[#99FF99]/40 shadow-[0_4px_20px_rgba(148,163,184,0.2)] overflow-hidden">
       <HeaderStarBackground stars={stars} />
       <div className="w-full px-4 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-20 md:h-28">
           <div className="shrink-0 flex items-center group cursor-pointer select-none overflow-visible">
             <Link href="/" className="flex flex-col items-center gap-1">
-              <div className="flex gap-[3px] p-1">
+              <div className="flex gap-0.75 p-1">
                 {"CRITICAL".split("").map((char, i) => (
                   <GamingKey key={`c-${i}`} char={char} index={i} />
                 ))}
               </div>
-              <div className="flex gap-[3px] p-1">
+              <div className="flex gap-0.75 p-1">
                 {"TYPING".split("").map((char, i) => (
                   <GamingKey key={`t-${i}`} char={char} index={i + 8} />
                 ))}
@@ -49,18 +53,18 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
               onClick={(handlePlayClick)}
             />
             {/* リンク先をページに変更 */}
-            <HeaderBtn href="/faq" text="Q&A" onClick={() => setIsOpen(!isOpen)} />
+            <HeaderBtn href="/faq" text="Q&A" onClick={() => setIsOpen(prev => !prev)} />
             <HeaderBtn
               href="/contact"
               text="お問い合わせ"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(prev => !prev)}
             />
           </nav>
 
           {/* ハンバーガーボタン (lg未満) */}
           <div className="lg:hidden flex items-center">
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(prev => !prev)}
               aria-label={isOpen ? "メニューを閉じる" : "メニューを開く"}
               aria-expanded={isOpen}
               className="p-2 rounded-lg text-[#fff9c4] hover:bg-white/10 transition-colors border border-white/20"
@@ -120,13 +124,13 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
               href="/faq"
               text="Q&A"
               fullWidth
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(prev => !prev)}
             />
             <HeaderBtn
               href="/contact"
               text="お問い合わせ"
               fullWidth
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(prev => !prev)}
             />
           </div>
         </div>
@@ -160,15 +164,15 @@ const GamingKey = ({ char, index }: { char: string; index: number }) => {
   return (
     <div className="relative group transition-transform duration-75 active:scale-95">
       <div
-        className={`relative z-10 flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-linear-to-b ${style.bg} rounded-lg md:rounded-xl border-t-[1px] md:border-t-2 border-l border-r border-b-[2px] md:border-b-4 ${style.border} border-b-black/30 shadow-[0_2px_0_rgba(0,0,0,0.3)] ${style.glow} transform transition-all group-hover:-translate-y-1 group-hover:brightness-110 group-active:translate-y-1 group-active:shadow-none group-active:border-b-0`}
+        className={`relative z-10 flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-linear-to-b ${style.bg} rounded-lg md:rounded-xl border-t md:border-t-2 border-l border-r border-b-2 md:border-b-4 ${style.border} border-b-black/30 shadow-[0_2px_0_rgba(0,0,0,0.3)] ${style.glow} transform transition-all group-hover:-translate-y-1 group-hover:brightness-110 group-active:translate-y-1 group-active:shadow-none group-active:border-b-0`}
       >
-        <div className="absolute inset-[3px] rounded-md bg-black/10 shadow-inner pointer-events-none"></div>
+        <div className="absolute inset-0.75 rounded-md bg-black/10 shadow-inner pointer-events-none"></div>
         <span
-          className={`relative z-20 text-xs md:text-lg lg:text-xl font-[900] ${style.text} drop-shadow-md`}
+          className={`relative z-20 text-xs md:text-lg lg:text-xl font-black ${style.text} drop-shadow-md`}
         >
           {char}
         </span>
-        <div className="absolute top-[2px] left-[2px] right-[2px] h-[35%] bg-linear-to-b from-white/40 to-transparent rounded-t-md pointer-events-none"></div>
+        <div className="absolute top-0.5 left-0.5 right-0.5 h-[35%] bg-linear-to-b from-white/40 to-transparent rounded-t-md pointer-events-none"></div>
       </div>
     </div>
   );
