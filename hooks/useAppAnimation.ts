@@ -1,5 +1,5 @@
 import { useAnimationContext } from "../app/providers";
-import { TargetAndTransition } from "framer-motion";
+import type { TargetAndTransition } from "framer-motion";
 
 export const useAppAnimation = () => {
   const { hasPlayedOpening } = useAnimationContext();

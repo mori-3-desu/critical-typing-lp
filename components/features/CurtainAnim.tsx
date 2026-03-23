@@ -3,7 +3,7 @@
 import { useAnimationContext } from "@/app/providers";
 import { CONFIG, CURTAIN_GRADIENT, PALETTE } from "@/utils/constants";
 import { type CurtainStar } from "@/types";
-import { AnimatePresence, motion } from "framer-motion";
+import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { CurtainDecorations } from "../common/CurtainDecorations";
 
@@ -39,8 +39,13 @@ const CurtainPanel = ({
     },
   };
 
+  // box-shadowを使っていたので上記で宣言しているscale等の動きで
+  // リフロー(再計算)が起きてしまい、CPU負荷が増加していた。
+  // box-shadowをlinearに変えることでブラウザはただの一枚の画像として扱う
+  // scale等で歪ませてもGPUは画像をゆがませるだけ。これによってCPU負荷を削減し、
+  // ブラウザではグラデーションの箱が親と一緒に歪んでいるだけの状態を作れる
   return (
-    <motion.div
+    <m.div
       initial="initial"
       animate={{ opacity: 1 }}
       exit="exit"
@@ -48,16 +53,31 @@ const CurtainPanel = ({
       className="relative w-1/2 h-full"
       style={{
         background: CURTAIN_GRADIENT,
-        boxShadow: isLeft
-          ? "20px 0 60px rgba(255, 255, 255, 0.6)"
-          : "-20px 0 60px rgba(255, 255, 255, 0.6)",
         [isLeft ? "borderRight" : "borderLeft"]:
           `4px solid ${PALETTE.curtainBorder}`,
         transformOrigin: isLeft ? "top left" : "top right",
       }}
     >
+      <div
+        className="absolute top-0 bottom-0 pointer-events-none"
+        style={{
+          width: "60px",
+          ...(isLeft
+            ? {
+                right: "-60px",
+                background:
+                  "linear-gradient(to right, rgba(255,255,255,0.6), transparent)",
+              }
+            : {
+                left: "-60px",
+                background:
+                  "linear-gradient(to left, rgba(255,255,255,0.6), transparent)",
+              }),
+        }}
+      />
+
       <CurtainDecorations stars={stars} />
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -88,9 +108,10 @@ export const CurtainAnim = ({
 
   return (
     <>
+    <LazyMotion features={domAnimation}>
       <AnimatePresence>
         {showCurtain && (
-          <motion.div
+          <m.div
             key="curtain-wrapper"
             className="fixed inset-0 z-9999 flex pointer-events-none"
             exit={{
@@ -103,9 +124,11 @@ export const CurtainAnim = ({
           >
             <CurtainPanel side="left" stars={leftCurtainStars} />
             <CurtainPanel side="right" stars={rightCurtainStars} />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
+
+    </LazyMotion>
 
       <div
         className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"
