@@ -25,15 +25,16 @@ export default function Header() {
 
   // Safariは一度別URLへ飛んでbackするとbfcacheが働き、
   // isOpenがtrueのまま復元されてCSSのtransitionが実行されず挙動がおかしくなる
-  // pageshowを使う
+  // visibilitychangeを使用する
   useEffect(() => {
-    const handlePageShow = (e: PageTransitionEvent) => {
-      if (e.persisted) {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
         setIsOpen(false);
       }
     };
-    window.addEventListener("pageshow", handlePageShow);
-    return () => window.removeEventListener("pageshow", handlePageShow);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, []);
 
   return (
