@@ -1,12 +1,17 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import { env } from "@/env";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const closeMenu = () => setIsOpen(false);
+  // Safariは一度別URLへ飛んでbackするとbfcacheが働き、
+  // isOpenがtrueのまま復元されてCSSのtransitionが実行されず挙動がおかしくなる
+  // flushSyncで対応する
+  const closeMenu = () => flushSync(() => setIsOpen(false));
+
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const scrollToTop = () => {
     document.getElementById("top")?.scrollTo({ top: 0, behavior: "smooth" });
@@ -23,18 +28,15 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // Safariは一度別URLへ飛んでbackするとbfcacheが働き、
-  // isOpenがtrueのまま復元されてCSSのtransitionが実行されず挙動がおかしくなる
-  // visibilitychangeを使用する
+  // flushSyncを潜り抜けられた時の保険
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
         setIsOpen(false);
       }
     };
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () =>
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
   }, []);
 
   return (
@@ -222,7 +224,7 @@ function HeaderBtn({
   );
 }
 
-// ドロワー用ナビゲーションボタン（文字大きめ）
+// ドロワー用ナビゲーションボタン
 function DrawerBtn({
   href,
   text,
