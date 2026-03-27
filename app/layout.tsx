@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import { generateHeaderStars } from "@/utils/star";
 import { AnimationProvider } from "./providers";
 import { env } from "@/env";
 import dynamic from "next/dynamic";
@@ -79,8 +78,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerStars = generateHeaderStars();
-
   return (
     <html lang="ja">
       {/* 外枠（白い額縁） */}
@@ -88,7 +85,7 @@ export default function RootLayout({
         className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white p-1.25 h-screen overflow-hidden box-border`}
       >
         <div className="relative w-full h-full rounded-[20px] overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
-          <Header stars={headerStars} />
+          <Header />
 
           {/* ページ遷移アニメーションの管理 */}
           <AnimationProvider>{children}</AnimationProvider>

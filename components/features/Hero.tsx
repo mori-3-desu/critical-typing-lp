@@ -2,16 +2,10 @@
 
 import { InfoCard } from "@/components/common/InfoCard";
 import { useAppAnimation } from "@/hooks/useAppAnimation";
-import { type CurtainStar } from "@/types";
 import { MainBgStar } from "../common/MainBgStar";
 import { GuideButtonNote } from "./GuideButtonNote";
 import { PlayGuide } from "./PlayGuide";
 import dynamic from "next/dynamic";
-
-type HeroProps = {
-  leftCurtainStars: CurtainStar[];
-  rightCurtainStars: CurtainStar[];
-};
 
 const CurtainAnim = dynamic(() =>
   import("./CurtainAnim").then((m) => m.CurtainAnim)
@@ -19,18 +13,12 @@ const CurtainAnim = dynamic(() =>
 const News = dynamic(() => import("./News"));
 
 // --- 3. メインコンポーネント ---
-export default function Hero({
-  leftCurtainStars,
-  rightCurtainStars,
-}: HeroProps) {
+export default function Hero() {
   const { shouldAnimate } = useAppAnimation();
 
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-linear-to-b from-indigo-700 via-purple-500 to-amber-400 font-rounded px-4 lg:px-[2vw] pt-8 lg:pt-[3vh] pb-10 lg:pb-[4vh]">
-      <CurtainAnim
-        leftCurtainStars={leftCurtainStars}
-        rightCurtainStars={rightCurtainStars}
-      />
+      <CurtainAnim />
       <MainBgStar />
 
       <div className="z-10 w-full lg:w-[95vw] flex flex-col items-center text-center mx-auto max-w-7xl">

@@ -1,11 +1,9 @@
 "use client";
-import { HeaderStarBackground } from "@/components/common/HeaderStarBackground";
-import { type HeaderStar } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 import { env } from "@/env";
 
-export default function Header({ stars }: { stars: HeaderStar[] }) {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePlayClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -19,7 +17,6 @@ export default function Header({ stars }: { stars: HeaderStar[] }) {
   // 値が先祖返りするバグを防ぐ
   return (
     <header className="relative w-full z-50 font-rounded transition-all duration-300 bg-linear-to-b from-[#0f2027]/95 via-[#203a43]/95 to-[#2c5364]/90 border-b-4 border-[#99FF99]/40 shadow-[0_4px_20px_rgba(148,163,184,0.2)] overflow-hidden">
-      <HeaderStarBackground stars={stars} />
       <div className="w-full px-4 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-20 md:h-28">
           <div className="shrink-0 flex items-center group cursor-pointer select-none overflow-visible">
