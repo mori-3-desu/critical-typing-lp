@@ -2,37 +2,24 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
-
+  // output:standaloneではNext.jsがnonceをインラインスクリプトに自動付与しないため
+  // nonce方式を断念し、'unsafe-inline'を採用する。
+  // 外部スクリプトの読み込み制限・その他ヘッダーによる多層防御は維持する。
   const csp = [
     "default-src 'self'",
-    // 'strict-dynamic': nonceを持つスクリプトから読み込まれるスクリプトも信頼する
-    // → Next.jsが動的にロードするchunkも許可される
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
-    // CSSはinline styleが避けられないケースが多いため unsafe-inline を許容
+    "script-src 'self' 'unsafe-inline'",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
-    // data: はNext.jsが生成するbase64画像に必要
     "img-src 'self' data:",
     "media-src 'self'",
-    // Google Formsのiframe埋め込みを許可
     "frame-src https://docs.google.com",
     "connect-src 'self'",
-    // Flashなどの古いプラグインを完全ブロック
     "object-src 'none'",
-    // <base>タグによるURLのっとりを防ぐ
     "base-uri 'self'",
-    // フォームの送信先を自サイトのみに制限
     "form-action 'self'",
   ].join("; ");
 
-  // x-nonce: layout.tsxでNext.jsのスクリプトにnonceを付与するために渡す
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-nonce", nonce);
-
-  const response = NextResponse.next({
-    request: { headers: requestHeaders },
-  });
+  const response = NextResponse.next();
 
   response.headers.set("Content-Security-Policy", csp);
   response.headers.set(
