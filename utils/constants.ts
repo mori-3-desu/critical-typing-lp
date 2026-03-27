@@ -9,7 +9,6 @@ export const STAR_CONFIG = {
 
 export const HEADER_OFFSET_PX = 140 as const;
 
-/* Hero.tsx */
 export const CONFIG = {
   curtain: {
     animDuration: 2.0,
@@ -18,7 +17,11 @@ export const CONFIG = {
     physics: {
       skewAngle: 15,
       shrinkScale: [1, 0.9, 1],
-      keyframeTimes: [0, 0.4, 1]
+      keyframeTimes: [0, 0.4, 1],
+      mobile: {
+        skewAngle: 5,
+        shrinkScale: [1, 0.97, 1],
+      },
     }
   },
   ui: {

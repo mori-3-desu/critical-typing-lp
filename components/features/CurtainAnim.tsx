@@ -6,11 +6,21 @@ import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const { animDuration, openDelay } = CONFIG.curtain;
-const { skewAngle, shrinkScale, keyframeTimes } = CONFIG.curtain.physics;
+const { keyframeTimes, mobile } = CONFIG.curtain.physics;
 
 // --- 左・右のカーテンパネル部品 ---
 const CurtainPanel = ({ side }: { side: "left" | "right" }) => {
   const isLeft = side === "left";
+
+  // スマホはパネルが小さく動きが過剰に見えるため控えめな値を使う
+  const isMobile =
+    typeof window !== "undefined" && window.innerWidth < 768;
+  const skewAngle = isMobile
+    ? mobile.skewAngle
+    : CONFIG.curtain.physics.skewAngle;
+  const shrinkScale = isMobile
+    ? mobile.shrinkScale
+    : CONFIG.curtain.physics.shrinkScale;
 
   const exitVariants = {
     initial: { x: 0 },
