@@ -8,6 +8,13 @@ export default function Header() {
 
   const closeMenu = () => setIsOpen(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
+  const scrollToTop = () => {
+    document.getElementById("top")?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // LOGOを変えてもここを改良するだけで反映される
+  // reduce初期値0、次は8...という感じ
+  const LOGO_WORD = ["CRITICAL", "TYPING"] as const;
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -15,6 +22,19 @@ export default function Header() {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  // Safariは一度別URLへ飛んでbackするとbfcacheが働き、
+  // isOpenがtrueのまま復元されてCSSのtransitionが実行されず挙動がおかしくなる
+  // pageshowを使う
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
 
   return (
     <>
@@ -24,24 +44,38 @@ export default function Header() {
           <div className="flex justify-between items-center h-20 md:h-28">
             {/* ロゴ */}
             <div className="shrink-0 flex items-center group cursor-pointer select-none overflow-visible">
-              <Link href="/" className="flex flex-col items-center gap-1">
-                <div className="flex gap-0.75 p-1">
-                  {"CRITICAL".split("").map((char, i) => (
-                    <GamingKey key={`c-${i}`} char={char} index={i} />
-                  ))}
-                </div>
-                <div className="flex gap-0.75 p-1">
-                  {"TYPING".split("").map((char, i) => (
-                    <GamingKey key={`t-${i}`} char={char} index={i + 8} />
-                  ))}
-                </div>
+              <Link
+                href="/"
+                className="flex flex-col items-center gap-1"
+                onClick={scrollToTop}
+              >
+                {LOGO_WORD.map((word, wordIndex) => {
+                  const offset = LOGO_WORD.slice(0, wordIndex).reduce(
+                    (sum, w) => sum + w.length,
+                    0,
+                  );
+                  return (
+                    <div key={word} className="flex gap-0.75 p-1">
+                      {word.split("").map((char, i) => (
+                        <GamingKey
+                          key={`${word}-${i}`}
+                          char={char}
+                          index={offset + i}
+                        />
+                      ))}
+                    </div>
+                  );
+                })}
               </Link>
             </div>
 
             {/* PCナビゲーション */}
             <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
               <HeaderBtn href={env.GAME_URL} text="今すぐプレイ" />
-              <HeaderBtn href={`${env.GAME_URL}?muted=true`} text="静かにプレイ" />
+              <HeaderBtn
+                href={`${env.GAME_URL}?muted=true`}
+                text="静かにプレイ"
+              />
               <HeaderBtn href="/faq" text="Q&A" />
               <HeaderBtn href="/contact" text="お問い合わせ" />
             </nav>
@@ -108,8 +142,16 @@ export default function Header() {
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <DrawerBtn href={env.GAME_URL} text="今すぐプレイ" onClick={closeMenu} />
-          <DrawerBtn href={`${env.GAME_URL}?muted=true`} text="静かにプレイ" onClick={closeMenu} />
+          <DrawerBtn
+            href={env.GAME_URL}
+            text="今すぐプレイ"
+            onClick={closeMenu}
+          />
+          <DrawerBtn
+            href={`${env.GAME_URL}?muted=true`}
+            text="静かにプレイ"
+            onClick={closeMenu}
+          />
           <DrawerBtn href="/faq" text="Q&A" onClick={closeMenu} />
           <DrawerBtn href="/contact" text="お問い合わせ" onClick={closeMenu} />
         </nav>
@@ -121,32 +163,31 @@ export default function Header() {
 const GamingKey = ({ char, index }: { char: string; index: number }) => {
   const twilightStyles = [
     {
-      bg: "from-indigo-600 to-purple-800",
+      background: "linear-gradient(to bottom, #4f46e5, #6b21a8)",
       border: "border-indigo-400",
-      text: "text-white",
       glow: "shadow-[0_0_15px_rgba(99,102,241,0.8)]",
     },
     {
-      bg: "from-violet-600 to-fuchsia-800",
+      background: "linear-gradient(to bottom, #7c3aed, #86198f)",
       border: "border-violet-400",
-      text: "text-white",
       glow: "shadow-[0_0_15px_rgba(139,92,246,0.8)]",
     },
     {
-      bg: "from-slate-700 to-blue-900",
+      background: "linear-gradient(to bottom, #334155, #1e3a5f)",
       border: "border-slate-400",
-      text: "text-white",
       glow: "shadow-[0_0_15px_rgba(148,163,184,0.8)]",
     },
   ];
   const style = twilightStyles[index % twilightStyles.length];
+
   return (
     <div className="relative group transition-transform duration-75 active:scale-95">
       <div
-        className={`relative z-10 flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-linear-to-b ${style.bg} rounded-lg md:rounded-xl border-t md:border-t-2 border-l border-r border-b-2 md:border-b-4 ${style.border} border-b-black/30 shadow-[0_2px_0_rgba(0,0,0,0.3)] ${style.glow} transform transition-all group-hover:-translate-y-1 group-hover:brightness-110 group-active:translate-y-1 group-active:shadow-none group-active:border-b-0`}
+        className={`relative z-10 flex items-center justify-center w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-lg md:rounded-xl border-t md:border-t-2 border-l border-r border-b-2 md:border-b-4 ${style.border} border-b-black/30 shadow-[0_2px_0_rgba(0,0,0,0.3)] ${style.glow} transform transition-all group-hover:-translate-y-1 group-hover:brightness-110 group-active:translate-y-1 group-active:shadow-none group-active:border-b-0`}
+        style={{ background: style.background }}
       >
         <div className="absolute inset-0.75 rounded-md bg-black/10 shadow-inner pointer-events-none" />
-        <span className={`relative z-20 text-xs md:text-lg lg:text-xl font-black ${style.text} drop-shadow-md`}>
+        <span className="relative z-20 text-xs md:text-lg lg:text-xl font-black text-white drop-shadow-md">
           {char}
         </span>
         <div className="absolute top-0.5 left-0.5 right-0.5 h-[35%] bg-linear-to-b from-white/40 to-transparent rounded-t-md pointer-events-none" />
@@ -156,7 +197,15 @@ const GamingKey = ({ char, index }: { char: string; index: number }) => {
 };
 
 // PC用ナビゲーションボタン
-function HeaderBtn({ href, text, onClick }: { href: string; text: string; onClick?: () => void }) {
+function HeaderBtn({
+  href,
+  text,
+  onClick,
+}: {
+  href: string;
+  text: string;
+  onClick?: () => void;
+}) {
   return (
     <Link
       href={href}
@@ -173,7 +222,15 @@ function HeaderBtn({ href, text, onClick }: { href: string; text: string; onClic
 }
 
 // ドロワー用ナビゲーションボタン（文字大きめ）
-function DrawerBtn({ href, text, onClick }: { href: string; text: string; onClick?: () => void }) {
+function DrawerBtn({
+  href,
+  text,
+  onClick,
+}: {
+  href: string;
+  text: string;
+  onClick?: () => void;
+}) {
   return (
     <Link
       href={href}
