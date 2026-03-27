@@ -81,12 +81,14 @@ export default function Header() {
         </div>
       </button>
 
-      {/* モバイルドロワー：z-[50]でheader(z-30)の上、ボタン(z-[60])の下 */}
+      {/* モバイルドロワー：z-50でheader(z-30)の上、ボタン(z-60)の下
+          aria-hidden: 閉じている間はスクリーンリーダーから完全に隠す */}
       <div
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
         aria-label="ナビゲーションメニュー"
+        aria-hidden={!isOpen}
         className="lg:hidden fixed inset-0 z-50 pointer-events-none"
       >
         {/* 背景オーバーレイ */}
@@ -98,8 +100,10 @@ export default function Header() {
           aria-hidden="true"
         />
 
-        {/* ドロワー本体：右からスライドイン */}
+        {/* ドロワー本体：右からスライドイン
+            inert: 閉じている間はキーボードフォーカス・クリックを完全にブロック */}
         <nav
+          inert={!isOpen}
           className={`absolute top-0 right-0 h-full w-[60%] max-w-xs font-rounded font-bold bg-[#1c045a] backdrop-blur-xl flex flex-col justify-center items-center px-6 gap-6 border-l border-white/10 pointer-events-auto transition-transform duration-500 ease-in-out shadow-[-8px_0_32px_rgba(255,207,156,0.25)] ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}

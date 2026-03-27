@@ -37,9 +37,10 @@ export const PlayGuide = () => {
           </p>
 
           <div className="my-4 lg:my-[1.2vw] relative w-full flex justify-center">
-            <div className="relative w-full max-w-[500px] lg:max-w-none lg:w-[32vw] aspect-video bg-black rounded-lg lg:rounded-[0.8vw] border-[3px] lg:border-[4px] border-white/90 shadow-xl overflow-hidden">
+            <div className="relative w-full max-w-125 lg:max-w-none lg:w-[32vw] aspect-video bg-black rounded-lg lg:rounded-[0.8vw] border-[3px] lg:border-4 border-white/90 shadow-xl overflow-hidden">
               <video
                 src="/demo.mp4"
+                aria-label="タイピングゲームのプレイデモ映像"
                 className="w-full h-full object-cover"
                 autoPlay
                 muted

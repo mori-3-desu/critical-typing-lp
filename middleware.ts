@@ -2,12 +2,11 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  // output:standaloneではNext.jsがnonceをインラインスクリプトに自動付与しないため
-  // nonce方式を断念し、'unsafe-inline'を採用する。
-  // 外部スクリプトの読み込み制限・その他ヘッダーによる多層防御は維持する。
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data:",
@@ -19,7 +18,14 @@ export function middleware(request: NextRequest) {
     "form-action 'self'",
   ].join("; ");
 
-  const response = NextResponse.next();
+  // x-nonce: Vercel上のNext.jsがこのヘッダーを読み取り、
+  // 自動生成するインラインスクリプトにnonceを付与する
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
+
+  const response = NextResponse.next({
+    request: { headers: requestHeaders },
+  });
 
   response.headers.set("Content-Security-Policy", csp);
   response.headers.set(

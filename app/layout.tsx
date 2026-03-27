@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, M_PLUS_Rounded_1c } from "next/font/google";
+import { M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { AnimationProvider } from "./providers";
 import { env } from "@/env";
 import dynamic from "next/dynamic";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["400", "700", "800"],
   display: "swap",
@@ -82,7 +77,7 @@ export default function RootLayout({
     <html lang="ja">
       {/* 外枠（白い額縁） */}
       <body
-        className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white h-screen overflow-hidden box-border`}
+        className={`${mPlusRounded.variable} font-sans text-gray-900 bg-white h-screen overflow-hidden box-border`}
       >
         <div className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
           <Header />
