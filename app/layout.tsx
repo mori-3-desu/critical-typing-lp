@@ -79,7 +79,7 @@ export default function RootLayout({
       <body
         className={`${mPlusRounded.variable} font-sans text-gray-900 bg-white h-screen overflow-hidden box-border`}
       >
-        <div className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
+        <div id="top" className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
           <Header />
 
           {/* ページ遷移アニメーションの管理 */}
