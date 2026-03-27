@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useState } from "react";
 import { flushSync } from "react-dom";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { env } from "@/env";
 
 export default function Header() {
@@ -9,8 +9,7 @@ export default function Header() {
 
   // Safariは一度別URLへ飛んでbackするとbfcacheが働き、
   // isOpenがtrueのまま復元されてCSSのtransitionが実行されず挙動がおかしくなる
-  // flushSyncで対応する
-  const closeMenu = () => flushSync(() => setIsOpen(false));
+  const closeMenu = () => setIsOpen(false);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const scrollToTop = () => {
@@ -28,16 +27,35 @@ export default function Header() {
     };
   }, [isOpen]);
 
-  // flushSyncを潜り抜けられた時の保険
   useEffect(() => {
+    const handlePageHide = () => {
+      flushSync(() => setIsOpen(false));
+      document.body.style.overflow = "";
+    };
+
     const handlePageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
         setIsOpen(false);
         document.body.style.overflow = "";
       }
     };
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "hidden") {
+        flushSync(() => setIsOpen(false));
+        document.body.style.overflow = "";
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("pagehide", handlePageHide);
     window.addEventListener("pageshow", handlePageShow);
-    return () => window.removeEventListener("pageshow", handlePageShow);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("pagehide", handlePageHide);
+      window.removeEventListener("pageshow", handlePageShow);
+    };
   }, []);
 
   return (
