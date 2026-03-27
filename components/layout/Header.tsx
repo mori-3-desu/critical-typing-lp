@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import { env } from "@/env";
 
@@ -21,7 +21,7 @@ export default function Header() {
   // reduce初期値0、次は8...という感じ
   const LOGO_WORD = ["CRITICAL", "TYPING"] as const;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
@@ -33,6 +33,7 @@ export default function Header() {
     const handlePageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
         setIsOpen(false);
+        document.body.style.overflow = "";
       }
     };
     window.addEventListener("pageshow", handlePageShow);
