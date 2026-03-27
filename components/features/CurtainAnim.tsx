@@ -2,27 +2,14 @@
 
 import { useAnimationContext } from "@/app/providers";
 import { CONFIG, CURTAIN_GRADIENT, PALETTE } from "@/utils/constants";
-import { type CurtainStar } from "@/types";
 import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { CurtainDecorations } from "../common/CurtainDecorations";
-
-type CurtainAnimProps = {
-  leftCurtainStars: CurtainStar[];
-  rightCurtainStars: CurtainStar[];
-};
 
 const { animDuration, openDelay } = CONFIG.curtain;
 const { skewAngle, shrinkScale, keyframeTimes } = CONFIG.curtain.physics;
 
 // --- 左・右のカーテンパネル部品 ---
-const CurtainPanel = ({
-  side,
-  stars,
-}: {
-  side: "left" | "right";
-  stars: CurtainStar[];
-}) => {
+const CurtainPanel = ({ side }: { side: "left" | "right" }) => {
   const isLeft = side === "left";
 
   const exitVariants = {
@@ -76,16 +63,12 @@ const CurtainPanel = ({
         }}
       />
 
-      <CurtainDecorations stars={stars} />
     </m.div>
   );
 };
 
 // --- メインのカーテンアニメーションコンポーネント ---
-export const CurtainAnim = ({
-  leftCurtainStars,
-  rightCurtainStars,
-}: CurtainAnimProps) => {
+export const CurtainAnim = () => {
   const { hasPlayedOpening, setHasPlayedOpening } = useAnimationContext();
   const shouldAnimate = !hasPlayedOpening;
 
@@ -122,8 +105,8 @@ export const CurtainAnim = ({
               },
             }}
           >
-            <CurtainPanel side="left" stars={leftCurtainStars} />
-            <CurtainPanel side="right" stars={rightCurtainStars} />
+            <CurtainPanel side="left" />
+            <CurtainPanel side="right" />
           </m.div>
         )}
       </AnimatePresence>

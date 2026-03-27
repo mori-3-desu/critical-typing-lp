@@ -21,8 +21,6 @@ export type FaqProps = {
   answer: string;
 };
 
-export type CurtainStar = Star & { isGlow: boolean };
-
 export type BgStar = {
   id: string;
   top: string;
@@ -39,13 +37,3 @@ export type GameButtonProps = {
   size?: "large" | "medium";
 };
 
-export type HeaderStar = {
-  id: number;
-  top: string;
-  left: string;
-  width: string;
-  height: string;
-  delay: string;
-  dur: string;
-  bshadow: string;
-};
