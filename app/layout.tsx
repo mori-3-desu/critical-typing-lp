@@ -82,9 +82,9 @@ export default function RootLayout({
     <html lang="ja">
       {/* 外枠（白い額縁） */}
       <body
-        className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white p-1.25 h-screen overflow-hidden box-border`}
+        className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white h-screen overflow-hidden box-border`}
       >
-        <div className="relative w-full h-full rounded-[20px] overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
+        <div className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
           <Header />
 
           {/* ページ遷移アニメーションの管理 */}
