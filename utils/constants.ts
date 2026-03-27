@@ -5,11 +5,6 @@ export const STAR_CONFIG = {
   STAR_PARTICLE_MIN_SIZE: 1,
   STAR_PARTICLE_MAX_SIZE: 3,
   STAR_DELAY: 5,
-
-  // Header
-  HEADER_COUNT: 12,
-  STAR_MIN_DURATION: 3,
-  STAR_DURATION: 4,
 } as const;
 
 export const HEADER_OFFSET_PX = 140 as const;
@@ -19,7 +14,6 @@ export const CONFIG = {
   curtain: {
     animDuration: 2.0,
     openDelay: 100,
-    starCount: 40,
 
     physics: {
       skewAngle: 15,
@@ -71,17 +65,6 @@ export const CURTAIN_GRADIENT = `
   ),
   ${PALETTE.curtainBg}
 ` as const;
-
-// カーテンの星
-export const CURTAIN_STAR_CONFIG = {
-  MAX_TOP: 90,
-  MAX_LEFT: 100,
-  MIN_SIZE: 2,
-  SIZE_VAR: 3,
-  MAX_DELAY: 3,
-  GLOW_CHANCE: 0.6,
-  TRANS_OPACITY: 0.9,
-} as const;
 
 // 通常の背景の星空
 export const BG_STAR_CONFIG = {

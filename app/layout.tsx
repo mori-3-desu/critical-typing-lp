@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Inter, M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import { generateHeaderStars } from "@/utils/star";
-import Footer from "@/components/features/Footer";
 import { AnimationProvider } from "./providers";
 import { env } from "@/env";
+import dynamic from "next/dynamic";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,10 +13,12 @@ const inter = Inter({
 });
 const mPlusRounded = M_PLUS_Rounded_1c({
   weight: ["400", "700", "800"],
-  display: "block",
+  display: "swap",
   preload: false,
   variable: "--font-rounded",
 });
+
+const Footer = dynamic(() => import("@/components/features/Footer"));
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.SITE_URL),
@@ -77,16 +78,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerStars = generateHeaderStars();
-
   return (
     <html lang="ja">
       {/* 外枠（白い額縁） */}
       <body
-        className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white p-1.25 h-screen overflow-hidden box-border`}
+        className={`${inter.variable} ${mPlusRounded.variable} font-sans text-gray-900 bg-white h-screen overflow-hidden box-border`}
       >
-        <div className="relative w-full h-full rounded-[20px] overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
-          <Header stars={headerStars} />
+        <div className="relative w-full h-full overflow-y-auto overflow-x-hidden bg-white shadow-2xl scroll-smooth">
+          <Header />
 
           {/* ページ遷移アニメーションの管理 */}
           <AnimationProvider>{children}</AnimationProvider>

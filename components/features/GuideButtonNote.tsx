@@ -1,33 +1,21 @@
 import { PALETTE } from "@/utils/constants";
 import { GameButton } from "../common/GameButton";
-import { motion } from "framer-motion";
-import { useAppAnimation } from "@/hooks/useAppAnimation";
 import { env } from "@/env";
 
 export const GuideButtonNote = () => {
-  const { commonTransition, initialStyle } = useAppAnimation();
 
   return (
     <>
-      <motion.div
-        initial={initialStyle({ opacity: 1 }, { opacity: 1 })}
-        animate={{ opacity: 1 }}
-        transition={commonTransition(1.0)}
-        className="mb-4 lg:mb-[1.5vw] mt-4 lg:mt-[0.5vw] animate-bounce"
-      >
+      <div className="mb-4 lg:mb-[1.5vw] mt-4 lg:mt-[0.5vw] animate-bounce">
         <p
           className="text-sm lg:text-[1.4vw] font-bold drop-shadow-md tracking-widest"
           style={{ color: PALETTE.highlight }}
         >
           ▼ タイピングゲームはこちらから ▼
         </p>
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={initialStyle({ opacity: 1, y: 20 }, { opacity: 1, y: 0 })}
-        animate={{ opacity: 1, y: 0 }}
-        transition={commonTransition(1.1, 0.5)}
-        className="flex flex-col items-center gap-4 lg:gap-[1.5vw] w-full mb-10 lg:mb-[3vw]"
+      <div className="flex flex-col items-center gap-4 lg:gap-[1.5vw] w-full mb-10 lg:mb-[3vw]"
       >
         <GameButton
           href={env.GAME_URL}
@@ -60,7 +48,7 @@ export const GuideButtonNote = () => {
           <br />
           もしゲーム中反応しなくなりましたら一度画面をクリックしてみてください！
         </p>
-      </motion.div>
+      </div>
     </>
   );
 };
