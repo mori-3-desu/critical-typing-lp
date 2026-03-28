@@ -4,7 +4,7 @@ export type ContactTitleProps = {
   title: string;
 };
 
-export const ContactTitle = ({ title }: ContactTitleProps) => {
+export const SubPageTitle = ({ title }: ContactTitleProps) => {
   return (
     <>
       {/* 1. ヘッダー本体 */}
