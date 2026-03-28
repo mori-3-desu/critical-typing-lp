@@ -1,16 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { faqs } from "./FaqQA";
+import { Faq } from "./FaqQA";
 import { AccordionItem } from "./Accordion";
 
-export const FaqInfo = () => {
+
+export const FaqInfo = ({ faqs }: {faqs: Faq[]}) => {
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 pb-32">
       <div className="lg:col-span-7 flex flex-col gap-4">
         {faqs.map((faq) => (
           <AccordionItem
             key={faq.id}
+            id={faq.id}
             question={faq.question}
             answer={faq.answer}
           />

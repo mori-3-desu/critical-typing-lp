@@ -1,6 +1,7 @@
 import { StarryBackground } from "@/components/common/StarryBackground";
 import { FaqInfo } from "./FaqInfo";
 import { FaqHeader } from "./FaqHeader";
+import { faqs } from "./FaqQA";
 
 export default function FAQPage() {
   return (
@@ -14,7 +15,7 @@ export default function FAQPage() {
 
       <main className="relative w-[95%] xl:w-[90%] max-w-350 mx-auto py-10 flex flex-col items-center">
         <FaqHeader />
-        <FaqInfo />
+        <FaqInfo faqs={faqs}/>
       </main>
     </div>
   );
