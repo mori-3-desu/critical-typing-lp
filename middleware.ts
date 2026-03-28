@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function middleware(_request: NextRequest) {
   // Next.js 16はVercel上でもx-nonceヘッダーを自動でスクリプトに適用しないため
   // nonce方式を断念し 'unsafe-inline' を採用する
   // 外部ドメインからのスクリプト読み込み禁止は維持されるため
@@ -21,6 +21,7 @@ export function middleware(request: NextRequest) {
   ].join("; ");
 
   const response = NextResponse.next();
+  response.headers.set("Content-Security-Policy", csp);
   response.headers.set(
     "Strict-Transport-Security",
     "max-age=63072000; includeSubDomains"
