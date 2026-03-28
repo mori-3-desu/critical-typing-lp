@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { FaqProps } from "../../types";
+import { Faq } from "./FaqQA";
 
-export function AccordionItem({ question, answer }: FaqProps) {
+export function AccordionItem({ id, question, answer }: Faq) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
