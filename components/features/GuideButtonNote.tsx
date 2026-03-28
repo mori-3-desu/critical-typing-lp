@@ -32,7 +32,7 @@ export const GuideButtonNote = () => {
           />
 
           <GameButton
-            href={env.GAME_URL}
+            href={`${env.GAME_URL}?muted=true`}
             variant="secondary"
             size="medium"
             label="静かに始める (ミュート)"

@@ -6,15 +6,9 @@ const envSchema = z.object({
   SITE_URL: z.string().url("Invalid Site URL"),
 });
 
-const parsed = envSchema.safeParse({
+export const env = envSchema.parse({
   GOOGLE_FORM_URL: process.env.NEXT_PUBLIC_GOOGLE_FORM_URL,
   GAME_URL: process.env.NEXT_PUBLIC_GAME_URL,
   SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
 });
 
-if (!parsed.success) {
-  console.error(" Environment variable error:", parsed.error.format());
-  throw new Error("Missing or invalid environment variables");
-}
-
-export const env = parsed.data;
