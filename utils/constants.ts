@@ -1,12 +1,3 @@
-/* 星の設定 */
-export const STAR_CONFIG = {
-  COUNT: 60,
-  STAR_TOP_LEFT: 100,
-  STAR_PARTICLE_MIN_SIZE: 1,
-  STAR_PARTICLE_MAX_SIZE: 3,
-  STAR_DELAY: 5,
-} as const;
-
 export const HEADER_OFFSET_PX = 140 as const;
 
 export const CONFIG = {
@@ -22,7 +13,7 @@ export const CONFIG = {
         skewAngle: 5,
         shrinkScale: [1, 0.97, 1],
       },
-    }
+    },
   },
   ui: {
     cardBorderMain: "min(0.8vw, 6px)",
@@ -68,20 +59,3 @@ export const CURTAIN_GRADIENT = `
   ),
   ${PALETTE.curtainBg}
 ` as const;
-
-// 通常の背景の星空
-export const BG_STAR_CONFIG = {
-  MOBILE_BREAKPOINT: 768,
-  COUNT: { MOBILE: 50, PC: 150 },
-  GRID: { MOBILE: 10, PC: 20 },
-  OFFSET: { BASE: 10, VAR: 80 },
-  SIZE: {
-    MOBILE_BASE: 0.5,
-    MOBILE_VAR: 1.0,
-    PC_BASE: 1.5,
-    PC_VAR: 2.0,
-    SMALL_CHANCE: 0.7,
-    SMALL_VAR: 0.5,
-  },
-  ANIM: { MAX_DELAY: 5, MIN_DUR: 2, DUR_VAR: 4 },
-} as const;

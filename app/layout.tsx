@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/title.jpg",
+        url: "/demo_title.webp",
         width: 1200,
         height: 630,
         alt: "CRITICAL TYPING Title Screen",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     title: "CRITICAL TYPING",
     description:
       "ミスったらBackSpaceで修正!正確さを極めるポップな無料タイピングゲーム。",
-    images: ["/title.jpg"],
+    images: ["/demo_title.webp"],
   },
 };
 
@@ -74,8 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
-      {/* 外枠（白い額縁） */}
+    <html lang="ja" data-scroll-behavior="smooth">
       <body
         className={`${mPlusRounded.variable} font-sans text-gray-900 bg-white h-screen overflow-hidden box-border`}
       >

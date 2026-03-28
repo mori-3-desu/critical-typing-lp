@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { flushSync } from "react-dom";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { env } from "@/env";
 
@@ -28,32 +27,15 @@ export default function Header() {
   }, [isOpen]);
 
   useEffect(() => {
-    const handlePageHide = () => {
-      flushSync(() => setIsOpen(false));
-      document.body.style.overflow = "";
-    };
-
     const handlePageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
-        setIsOpen(false);
-        document.body.style.overflow = "";
+        location.reload();
       }
     };
 
-    const handleVisibility = () => {
-      if (document.visibilityState === "hidden") {
-        flushSync(() => setIsOpen(false));
-        document.body.style.overflow = "";
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibility);
-    window.addEventListener("pagehide", handlePageHide);
     window.addEventListener("pageshow", handlePageShow);
 
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibility);
-      window.removeEventListener("pagehide", handlePageHide);
       window.removeEventListener("pageshow", handlePageShow);
     };
   }, []);

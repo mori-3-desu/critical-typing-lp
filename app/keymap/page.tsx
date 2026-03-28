@@ -1,13 +1,11 @@
 "use client";
-import { StarryBackground } from "@/components/common/StarBackground";
-import { generateStars } from "@/utils/star";
+import { StarryBackground } from "@/components/common/StarryBackground";
 import { KeyHeader } from "./KeyHeader";
 import { useSmoothScroll } from "@/hooks/useScroll";
 import { KeySection } from "./KeySection";
 
 export default function KeymapPage() {
   const { containerRef, scrollToSection } = useSmoothScroll();
-  const initialStars = generateStars();
 
   return (
     <div
@@ -21,7 +19,7 @@ export default function KeymapPage() {
       }}
     >
       <div className="fixed inset-0 pointer-events-none bg-[url('/grid.svg')] opacity-20 mix-blend-overlay" />
-      <StarryBackground stars={initialStars} />
+      <StarryBackground />
 
       <main className="relative w-[95%] xl:w-[90%] max-w-450 mx-auto py-6 md:py-10 flex flex-col items-center">
         <KeyHeader />
