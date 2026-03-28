@@ -55,6 +55,7 @@ LPではユーザーの興味を惹きつけるため、CSSアニメーション
 
 - **AWSへの移行検討:** インフラ構築の学習として、現在のVercel環境から AWS (S3 + CloudFront + Route53) への移行構成を検討中。
 - **OSS活動:** 自作したCSSアニメーションをライブラリ化し、オープンソースとして公開する計画があります。
+- **bfcache対応の根本解決:** 現在、ブラウザの戻る操作時に `pageshow` イベントで `location.reload()` を呼ぶ**回避策**を採用しています。これはbfcacheによるアニメーション状態の不整合を防ぐための暫定対応であり、bfcacheの恩恵（瞬時の復元）を意図的に無効化しています。根本的には `Cache-Control: no-store` ヘッダーの設定、もしくはアニメーション状態管理をbfcacheと共存できる設計へ刷新することが望ましいです。
 
 - **Qiita:** [https://qiita.com/mori-3-desu]
 - **GitHub:** [https://github.com/mori-3-desu]
