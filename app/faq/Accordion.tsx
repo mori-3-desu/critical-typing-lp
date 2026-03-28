@@ -1,20 +1,15 @@
 "use client";
-import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FaqProps } from "../../types";
 
 export function AccordionItem({ question, answer }: FaqProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      className="border border-white/40 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm shadow-sm transition-all hover:bg-white/20"
-    >
+    <div className="border border-white/40 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm shadow-sm transition-all hover:bg-white/20">
       <button
-        onClick={() => setIsOpen(prev => !prev)}
+        onClick={toggleMenu}
         className="flex items-center justify-between w-full p-5 text-left transition-colors cursor-pointer"
       >
         <div className="font-bold text-white text-base md:text-lg flex items-start gap-3 w-[90%]">
@@ -38,31 +33,16 @@ export function AccordionItem({ question, answer }: FaqProps) {
         </svg>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ scaleY: 0, opacity: 0 }}
-            animate={{ scaleY: 1, opacity: 1 }}
-            exit={{ scaleY: 0, opacity: 0 }}
-            style={{ originY: 0 }}
-            transition={{ duration: 0.4, ease: [0.04, 0.45, 0.73, 1] }}
-            className="overflow-hidden"
-          >
-            <motion.div
-              initial={{ scaleY: 1.5 }}
-              animate={{ scaleY: 1 }}
-              style={{ originY: 0 }}
-              transition={{ duration: 0.4, ease: [0.04, 0.45, 0.73, 1] }}
-            >
-              <div className="p-5 text-white flex items-start gap-3">
-                <span className="font-bold text-cyan-300">A.</span>
-                <span>{answer}</span>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      <div
+        className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      >
+        <div className="overflow-hidden">
+          <div className="p-5 text-white flex items-start gap-3">
+            <span className="font-bold text-cyan-300">A.</span>
+            <span>{answer}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

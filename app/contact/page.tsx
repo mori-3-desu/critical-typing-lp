@@ -1,5 +1,5 @@
 import { ContactForm } from "@/app/contact/Form";
-import { ContactTitle } from "@/app/contact/SubPageTitle";
+import { SubPageTitle } from "@/app/contact/SubPageTitle";
 import { StarryBackground } from "@/components/common/StarBackground";
 import { generateStars } from "@/utils/star";
 import { ContactNote } from "./Note";
@@ -22,7 +22,7 @@ export default function ContactPage() {
       <StarryBackground stars={initialStars} />
 
       <main className="relative w-[95%] md:w-[80%] xl:w-[80%] max-w-250 mx-auto py-10 flex flex-col items-center">
-        <ContactTitle title="お問い合わせ" />
+        <SubPageTitle title="お問い合わせ" />
         <ContactForm googleFormUrl={env.GOOGLE_FORM_URL} />
         <ContactNote />
       </main>

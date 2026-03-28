@@ -22,7 +22,7 @@ export const CONFIG = {
         skewAngle: 5,
         shrinkScale: [1, 0.97, 1],
       },
-    }
+    },
   },
   ui: {
     cardBorderMain: "min(0.8vw, 6px)",
