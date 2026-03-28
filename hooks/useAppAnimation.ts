@@ -1,6 +1,8 @@
 import { useAnimationContext } from "../app/providers";
 import type { TargetAndTransition } from "framer-motion";
 
+// カーテンアニメーションで初回のみ実行
+// falseの場合は何もしない
 export const useAppAnimation = () => {
   const { hasPlayedOpening } = useAnimationContext();
   const shouldAnimate = !hasPlayedOpening;

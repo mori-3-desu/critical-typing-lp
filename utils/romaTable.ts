@@ -1,3 +1,4 @@
+// キリンになってて草
 export const ROMA_VARIATIONS: Record<string, string[]> = {
   a: ["a"],
   i: ["i"],
@@ -86,7 +87,18 @@ export const ROMA_VARIATIONS: Record<string, string[]> = {
   "?": ["Shift+/"],
 };
 
-export const GROUP_CONFIG = [
+type Row = {
+  chars: string[];
+  keys: string[];
+};
+
+type Group = {
+  id: string;
+  title: string;
+  rows: Row[];
+};
+
+export const GROUP_CONFIG: Group[] = [
   {
     id: "basic",
     title: "基本 (Basic)",

@@ -8,9 +8,9 @@ export const FaqInfo = () => {
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 pb-32">
       <div className="lg:col-span-7 flex flex-col gap-4">
-        {faqs.map((faq, index) => (
+        {faqs.map((faq) => (
           <AccordionItem
-            key={index}
+            key={faq.id}
             question={faq.question}
             answer={faq.answer}
           />
@@ -50,7 +50,7 @@ export const FaqInfo = () => {
 
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-cyan-900 font-bold rounded-full shadow-lg hover:scale-105 hover:bg-cyan-50 transition-all text-sm md:text-base"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-cyan-900 font-bold rounded-full shadow-lg hover:scale-105 hover:bg-cyan-50 active:scale-95 transition-all text-sm md:text-base"
           >
             <span>📩</span> お問い合わせページへ
           </Link>

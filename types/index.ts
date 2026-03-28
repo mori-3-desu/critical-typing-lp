@@ -7,6 +7,7 @@ export type Star = {
   left: string;
   size: string;
   delay: string;
+  duration: string;
 };
 
 // 今回は初期画面時のみの仕様のためこの型を採用している
@@ -14,20 +15,6 @@ export type Star = {
 export type AnimationContextType = {
   hasPlayedOpening: boolean;
   setHasPlayedOpening: (value: boolean) => void;
-};
-
-export type FaqProps = {
-  question: string;
-  answer: string;
-};
-
-export type BgStar = {
-  id: string;
-  top: string;
-  left: string;
-  delay: string;
-  dur: string;
-  size: string;
 };
 
 export type GameButtonProps = {

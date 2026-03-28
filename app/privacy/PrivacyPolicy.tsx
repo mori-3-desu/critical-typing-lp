@@ -1,3 +1,4 @@
+// todo: 共通化可能な箇所は共通化していく
 import Link from "next/link";
 
 export const PrivacyPolicy = () => {

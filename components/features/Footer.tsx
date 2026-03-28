@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-center gap-8">
         {/* 左側: ロゴと説明 */}
         <div className="flex flex-col gap-2 text-center xl:text-left">
-          <h2 className="text-2xl font-[900] tracking-wider drop-shadow-md">
-            <span className="bg-linear-to-r from-[#fff9c4] via-[#fcd34d] to-[#fff9c4] bg-clip-text text-transparent bg-[length:200%_auto]">
+          <h2 className="text-2xl font-black tracking-wider drop-shadow-md">
+            <span className="bg-linear-to-r from-[#fff9c4] via-[#fcd34d] to-[#fff9c4] bg-clip-text text-transparent bg-size-[200%_auto]">
               CRITICAL TYPING
             </span>
           </h2>

@@ -1,3 +1,4 @@
+// todo: 共通化可能な箇所を共通化していく
 export const TermsOfSerVice = () => {
   return (
     <>
@@ -38,7 +39,6 @@ export const TermsOfSerVice = () => {
                 <br />
                 スクリーンショットやプレイ結果のシェア。
               </li>
-              {/* 追加箇所：ブログ紹介 */}
               <li>
                 <strong className="text-cyan-200">
                   ブログやメディアでの紹介:

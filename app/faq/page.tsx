@@ -1,10 +1,8 @@
-import { generateStars } from "@/utils/star";
-import { StarryBackground } from "@/components/common/StarBackground";
+import { StarryBackground } from "@/components/common/StarryBackground";
 import { FaqInfo } from "./FaqInfo";
 import { FaqHeader } from "./FaqHeader";
 
 export default function FAQPage() {
-  const initialStars = generateStars();
   return (
     <div
       className="fixed inset-0 w-full h-dvh text-white font-rounded overflow-y-auto z-9999 theme-blue"
@@ -12,7 +10,7 @@ export default function FAQPage() {
         background: "linear-gradient(to bottom, #143C5A, #86B6E0)",
       }}
     >
-      <StarryBackground stars={initialStars} />
+      <StarryBackground />
 
       <main className="relative w-[95%] xl:w-[90%] max-w-350 mx-auto py-10 flex flex-col items-center">
         <FaqHeader />

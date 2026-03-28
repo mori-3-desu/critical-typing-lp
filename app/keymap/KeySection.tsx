@@ -5,12 +5,7 @@ type Props = {
   scrollToSection: (id: string) => void;
 };
 
-type SectionBoxProps = {
-  title: string;
-  children: React.ReactNode;
-};
-
-type TipBoxProps = {
+type BoxProps = {
   title: string;
   children: React.ReactNode;
 };
@@ -20,12 +15,15 @@ type KeySmallProps = {
 };
 
 type KeyCapProps = {
-    char: string;
-    code: string;
-    highlight?: boolean;
-}
+  char: string;
+  code: string;
+  highlight?: boolean;
+};
 
 export const KeySection = ({ scrollToSection }: Props) => {
+  // カリー化でJSXからロジックを分離
+  const handleScrollTo = (id: string) => () => scrollToSection(id);
+
   return (
     <>
       <div className="w-full grid grid-cols-1 xl:grid-cols-12 gap-6 xl:gap-10 pb-32">
@@ -34,7 +32,7 @@ export const KeySection = ({ scrollToSection }: Props) => {
             <button
               key={group.id}
               type="button"
-              onClick={() => scrollToSection(group.id)}
+              onClick={handleScrollTo(group.id)}
               className="whitespace-nowrap px-4 py-2 rounded-lg bg-indigo-900/80 border border-indigo-500/30 text-xs font-bold text-indigo-100 shadow-md active:bg-indigo-700 active:scale-95 transition-all"
             >
               {group.title.split(" ")[0]} {/* 短いタイトルを表示 */}
@@ -42,7 +40,7 @@ export const KeySection = ({ scrollToSection }: Props) => {
           ))}
           <button
             type="button"
-            onClick={() => scrollToSection("tips")}
+            onClick={handleScrollTo("tips")}
             className="whitespace-nowrap px-4 py-2 rounded-lg bg-indigo-900/80 border border-indigo-500/30 text-xs font-bold text-indigo-100 shadow-md active:bg-indigo-700 active:scale-95 transition-all"
           >
             Tips
@@ -53,9 +51,9 @@ export const KeySection = ({ scrollToSection }: Props) => {
           <div id="basic">
             <SectionBox title="基本 (Basic)">
               <div className="grid grid-cols-5 gap-2 md:gap-3">
-                {GROUP_CONFIG[0].rows.map((row, i) =>
+                {GROUP_CONFIG[0].rows.flatMap((row, i) =>
                   row.chars.map((char, j) => (
-                    <KeyCap key={i + j} char={char} code={row.keys[j]} />
+                    <KeyCap key={`${i}-${j}`} char={char} code={row.keys[j]} />
                   )),
                 )}
               </div>
@@ -65,9 +63,9 @@ export const KeySection = ({ scrollToSection }: Props) => {
           <div id="dakuon">
             <SectionBox title="濁音 (Dakuon)">
               <div className="grid grid-cols-5 gap-2 md:gap-3">
-                {GROUP_CONFIG[1].rows.map((row, i) =>
+                {GROUP_CONFIG[1].rows.flatMap((row, i) =>
                   row.chars.map((char, j) => (
-                    <KeyCap key={i + j} char={char} code={row.keys[j]} />
+                    <KeyCap key={`${i}-${j}`} char={char} code={row.keys[j]} />
                   )),
                 )}
               </div>
@@ -80,9 +78,13 @@ export const KeySection = ({ scrollToSection }: Props) => {
             <div id="yoon">
               <SectionBox title="拗音 (Yoon)">
                 <div className="grid grid-cols-3 gap-2 md:gap-3">
-                  {GROUP_CONFIG[2].rows.map((row, i) =>
+                  {GROUP_CONFIG[2].rows.flatMap((row, i) =>
                     row.chars.map((char, j) => (
-                      <KeyCap key={i + j} char={char} code={row.keys[j]} />
+                      <KeyCap
+                        key={`${i}-${j}`}
+                        char={char}
+                        code={row.keys[j]}
+                      />
                     )),
                   )}
                 </div>
@@ -92,10 +94,10 @@ export const KeySection = ({ scrollToSection }: Props) => {
             <div id="symbols">
               <SectionBox title="小書き・記号 (Symbols)">
                 <div className="grid grid-cols-5 gap-2 md:gap-3">
-                  {GROUP_CONFIG[3].rows.map((row, i) =>
+                  {GROUP_CONFIG[3].rows.flatMap((row, i) =>
                     row.chars.map((char, j) => (
                       <KeyCap
-                        key={i + j}
+                        key={`${i}-${j}`}
                         char={char}
                         code={row.keys[j]}
                         highlight={char === "!" || char === "?"}
@@ -184,7 +186,7 @@ export const KeySection = ({ scrollToSection }: Props) => {
   );
 };
 
-const SectionBox = ({ title, children }: SectionBoxProps) => (
+const SectionBox = ({ title, children }: BoxProps) => (
   <div className="bg-black/20 rounded-2xl p-4 md:p-6 border border-white/5 shadow-xl relative mt-3 md:mt-4 group">
     <div className="absolute -top-3 left-4 bg-linear-to-b from-indigo-600 to-indigo-800 px-5 py-2 rounded-lg border-t border-white/20 shadow-[0_4px_0_#312e81] flex items-center gap-2 cursor-pointer transition-all active:translate-y-1 active:shadow-none select-none">
       <div className="w-2 h-2 rounded-full bg-amber-400 group-hover:animate-pulse" />
@@ -196,7 +198,7 @@ const SectionBox = ({ title, children }: SectionBoxProps) => (
   </div>
 );
 
-const TipBox = ({ title, children }: TipBoxProps) => (
+const TipBox = ({ title, children }: BoxProps) => (
   <div className="bg-white/5 rounded-xl p-2 md:p-3 border border-white/5 flex flex-col items-center justify-center min-h-22.5">
     <span className="text-xs text-indigo-300 font-bold mb-2 border-b border-white/10 pb-1 w-full text-center truncate px-1">
       {title}
@@ -211,20 +213,16 @@ const KeySmall = ({ char }: KeySmallProps) => (
   </div>
 );
 
-const KeyCap = ({
-  char,
-  code,
-  highlight = false,
-}: KeyCapProps) => {
+const KeyCap = ({ char, code, highlight = false }: KeyCapProps) => {
   const variations = ROMA_VARIATIONS[code] || [code];
   const mainKey = variations[0];
   return (
     <div className="relative group select-none w-full">
       <div
-        className={`absolute inset-0 rounded-lg translate-y-[3px] md:translate-y-[5px] ${highlight ? "bg-amber-900" : "bg-slate-950"}`}
+        className={`absolute inset-0 rounded-lg translate-y-0.75 md:translate-y-1.25 ${highlight ? "bg-amber-900" : "bg-slate-950"}`}
       />
       <div
-        className={`relative w-full rounded-lg border-t border-white/10 flex flex-col items-center justify-center transition-transform active:translate-y-[3px] md:active:translate-y-[5px] h-11 md:h-14 xl:h-auto xl:aspect-[1/0.8] ${highlight ? "bg-linear-to-b from-amber-600 to-amber-700 shadow-[0_1px_0_rgba(255,255,255,0.2)_inset]" : "bg-linear-to-b from-slate-700 to-slate-800 shadow-[0_1px_0_rgba(255,255,255,0.1)_inset] hover:from-slate-600 hover:to-slate-700"}`}
+        className={`relative w-full rounded-lg border-t border-white/10 flex flex-col items-center justify-center transition-transform active:translate-y-0.75 md:active:translate-y-1.25 h-11 md:h-14 xl:h-auto xl:aspect-[1/0.8] ${highlight ? "bg-linear-to-b from-amber-600 to-amber-700 shadow-[0_1px_0_rgba(255,255,255,0.2)_inset]" : "bg-linear-to-b from-slate-700 to-slate-800 shadow-[0_1px_0_rgba(255,255,255,0.1)_inset] hover:from-slate-600 hover:to-slate-700"}`}
       >
         <span className="text-[clamp(14px,1.5vw,24px)] font-bold text-white leading-none mb-0.5 md:mb-1 drop-shadow-md">
           {char}

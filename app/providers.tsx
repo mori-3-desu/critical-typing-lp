@@ -9,6 +9,7 @@ const AnimationContext = createContext<AnimationContextType | undefined>(
 
 export function AnimationProvider({ children }: { children: ReactNode }) {
   // リロードすると false に初期化され、SPA遷移中は値を保持する
+  // 開幕のカーテンのアニメーションは初回のみの再生のため、リロードしない限りは再生させない
   const [hasPlayedOpening, setHasPlayedOpening] = useState(false);
 
   return (
