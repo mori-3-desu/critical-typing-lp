@@ -3,6 +3,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { type AnimationContextType } from "../types";
 
+// 作成時はundefinedを許容
+// undefinedを入れるのは、他の適当な初期値だとProviderが無くても動いてしまい、原因不明のバグにつながる
 const AnimationContext = createContext<AnimationContextType | undefined>(
   undefined,
 );
@@ -21,6 +23,7 @@ export function AnimationProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// カスタムフックでundefinedじゃないことを保証する
 export function useAnimationContext() {
   const context = useContext(AnimationContext);
   if (context === undefined) {
