@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Faq } from "./FaqQA";
 
-export function AccordionItem({ id, question, answer }: Faq) {
+export function AccordionItem({ question, answer }: Faq) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
 

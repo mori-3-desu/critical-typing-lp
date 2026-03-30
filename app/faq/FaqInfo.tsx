@@ -11,8 +11,7 @@ export const FaqInfo = ({ faqs }: {faqs: Faq[]}) => {
       <div className="lg:col-span-7 flex flex-col gap-4">
         {faqs.map((faq) => (
           <AccordionItem
-            key={faq.id}
-            id={faq.id}
+            key={faq.question}
             question={faq.question}
             answer={faq.answer}
           />
