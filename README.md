@@ -7,7 +7,7 @@
 | Type | URL | Source Code (GitHub) |
 | :--- | :--- | :--- |
 | **LP (Main)** | [https://criticaltyping.com](https://criticaltyping.com) | **Current Repository** |
-| **Game App** | [https://typing-game-eta-lime.vercel.app](https://typing-game-eta-lime.vercel.app) | [**👉 ゲーム本体のコードはこちら**](https://github.com/mori-3-desu/Typing-game) |
+| **Game App** | [https://criticaltyping.net](https://criticaltyping.net) | [**👉 ゲーム本体のコードはこちら**](https://github.com/mori-3-desu/Typing-game) |
 
 <p align="center">
   <img src="public/demo_screen.webp" width="400" alt="LP Top">

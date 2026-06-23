@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(_request: NextRequest) {
+export function proxy(_request: NextRequest) {
   // Next.js 16はVercel上でもx-nonceヘッダーを自動でスクリプトに適用しないため
   // nonce方式を断念し 'unsafe-inline' を採用する
   // 外部ドメインからのスクリプト読み込み禁止は維持されるため
